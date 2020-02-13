@@ -1,0 +1,47 @@
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">AutoService</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Acceuil<span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li ><a routerLink="/adminCategories">Présentation</a></li>
+          <li ><a routerLink="/adminProducts">Contact</a></li>
+        </ul>
+      </li>
+      <li class="dropdown" *ngIf="isAuthenticated()">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Votre éspace
+          <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li *ngIf="isAdmin()"><a routerLink="/adminServices">Gestion des Services</a></li>
+          <li *ngIf="isUser()"><a routerLink="/adminCollaborateurs">Votre compte</a></li>
+          <li *ngIf="isAdmin()"><a routerLink="/adminUsers">Gestion des utilisateurs</a></li>
+        </ul>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav pull-right">
+      <li>
+        <a *ngIf="!isAuthenticated()" routerLink="/login">
+          <span class="glyphicon glyphicon-log-in"> Login</span> </a></li>
+      <li> <a class="btn" *ngIf="isAuthenticated()" (click)="logOut()">
+        <span class="glyphicon glyphicon-log-out"> Logout</span></a></li>
+      <li><div>
+      </div></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="row">
+  <div class="col-md-3">
+    <app-services>
+
+    </app-services>
+  </div>
+  <div class="col-md-6">
+    <router-outlet>
+    </router-outlet>
+  </div>
+</div>
+
+

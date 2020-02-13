@@ -1,0 +1,42 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    Gestion des utilisateurs
+  </div>
+  <div class="panel-body">
+    <div *ngIf="mode=='edit-user'" class="col-md-6">
+      <form #f="ngForm" (ngSubmit)="onaddRole(f.value)">
+        <div class="form-group">
+          <label class="control-label">Name</label>
+          <input type="text" name="username" class="form-control" [(ngModel)]="currentUser.username">
+          <label class="control-label">Type de compte</label>
+          <select class="form-group" name="rolename" ngModel>
+            <option value="Collaborateur">Collaborateur</option>
+            <option value="Conducteur">Conducteur</option>
+          </select>
+        </div>
+        <button class="btn btn-success" type="submit">Save</button>
+      </form>
+    </div>
+    <div *ngIf="mode=='list'">
+      <table class="table">
+        <tr>
+          <th>Name</th>
+        </tr>
+        <tr *ngFor="let u of appUsers._embedded.appUsers">
+          <td>{{u.username}}</td>
+          <td>
+            <button class="btn btn-danger" (click)="onDeleteUser(u)">
+              <span class="glyphicon glyphicon-remove" ></span>
+            </button>
+          </td>
+          <td>
+            <button class="btn btn-info" (click)="onEditUser(u)">
+              <span class="glyphicon glyphicon-check" ></span>
+            </button>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+  </div>
+</div>

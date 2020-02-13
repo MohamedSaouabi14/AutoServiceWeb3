@@ -1,0 +1,10 @@
+<table class="table table-striped">
+  <tr>
+    <th>Name</th><th>Adresse</th>
+  </tr>
+  <tr *ngFor="let c of collaborateurs._embedded.collaborateurs">
+    <td>{{c.name}}</td>
+    <td>{{c.adresse}}</td>
+  </tr>
+</table>
+
