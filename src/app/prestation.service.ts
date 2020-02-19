@@ -1,19 +1,23 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpEvent, HttpHeaders, HttpRequest} from '@angular/common/http';
 import {AuthenticationService} from './authentication.service';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PrestationService {
   public host: string = 'http://localhost:8087';
+  private reportProgress;
 
   constructor(private http: HttpClient, private authService: AuthenticationService) { }
   getAllServices() {
-    return this.http.get(this.host + '/services');
+    let headers = new HttpHeaders({'authorization': 'Bearer ' + this.authService.jwt});
+    return this.http.get(this.host + '/services',{ headers : headers});
   }
   getRessource(url) {
-    return this.http.get(url);
+    let headers = new HttpHeaders({'authorization': 'Bearer ' + this.authService.jwt});
+    return this.http.get( url,{ headers : headers});
   }
   deleteRessource(url) {
     let headers = new HttpHeaders({'authorization': 'Bearer ' + this.authService.jwt});
@@ -26,5 +30,18 @@ export class PrestationService {
   putRessource(url, data) {
     let headers = new HttpHeaders({'authorization': 'Bearer ' + this.authService.jwt});
     return this.http.patch(url, data , { headers: headers});
+  }
+
+
+  uploadPhotoCol(file: File,idCol):  Observable<HttpEvent<{}>>{
+     let formdata : FormData = new FormData();
+     formdata.append('file', file);
+     if (this.authService.jwt == null) this.authService.loadToken();
+     const req = new HttpRequest('POST', this.host + '/uploadPhoto/'+idCol, formdata,{
+         reportProgress: true,
+         responseType: 'text',
+         headers: new HttpHeaders({'authorization': 'Bearer ' + this.authService.jwt})
+     });
+     return this.http.request(req);
   }
 }

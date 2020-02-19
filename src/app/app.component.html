@@ -15,7 +15,7 @@
           <span class="caret"></span></a>
         <ul class="dropdown-menu">
           <li *ngIf="isAdmin()"><a routerLink="/adminServices">Gestion des Services</a></li>
-          <li *ngIf="isUser()"><a routerLink="/adminCollaborateurs">Votre compte</a></li>
+          <li *ngIf="isUser()"><a (click)="onCollaborateursDispo()">Collaborateurs Disponibles</a></li>
           <li *ngIf="isAdmin()"><a routerLink="/adminUsers">Gestion des utilisateurs</a></li>
         </ul>
       </li>

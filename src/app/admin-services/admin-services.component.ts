@@ -51,7 +51,7 @@ export class AdminServicesComponent implements OnInit {
       });
   }
   currentService;
-  onEditCat(ser) {
+  onEditservice(ser) {
     this.prestService.getRessource(ser._links.self.href)
       .subscribe(data => {
         this.currentService = data;

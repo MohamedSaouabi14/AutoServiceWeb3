@@ -13,6 +13,7 @@ const routes: Routes = [
   {path: 'adminServices', component: AdminServicesComponent},
   {path: 'adminUsers', component: AdminUsersComponent},
   {path: 'inscription', component: InscriptionComponent},
+  {path: '', redirectTo: 'collaborateurs' , pathMatch : 'full'}
 ];
 
 @NgModule({

@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {AuthenticationService} from './authentication.service';
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -9,7 +10,9 @@ import {AuthenticationService} from './authentication.service';
 })
 export class AppComponent {
   title = 'AutoServiceWeb';
-  constructor(private authService: AuthenticationService) {
+
+  private currentService;
+  constructor(private authService: AuthenticationService,private router: Router) {
   }
   ngOnInit(): void {
     this.authService.loadToken();
@@ -26,5 +29,10 @@ export class AppComponent {
 
   logOut() {
     this.authService.logout();
+  }
+
+  onCollaborateursDispo() {
+    this.currentService=undefined;
+    this.router.navigateByUrl('/Collaborateurs/4/0');
   }
 }

@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {UsersService} from '../users.service';
 import {AuthenticationService} from '../authentication.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-admin-users',
@@ -11,7 +12,7 @@ export class AdminUsersComponent implements OnInit {
   appUsers;
   mode='list';
   host2: string = 'http://localhost:8080';
-  constructor(private usersService: UsersService,private authenticationService: AuthenticationService) { }
+  constructor(private usersService: UsersService,private authenticationService: AuthenticationService,private router: Router) { }
   ngOnInit() {
     this.onGetAllUsers();
   }
@@ -66,6 +67,7 @@ export class AdminUsersComponent implements OnInit {
     this.addRole(data)
       .subscribe(resp => {
         console.log(resp);
+        this.router.navigateByUrl('/');
       }, err => {
         console.log(err);
       });

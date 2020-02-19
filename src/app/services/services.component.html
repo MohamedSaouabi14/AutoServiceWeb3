@@ -1,9 +1,9 @@
 <ul class="list-group" >
-  <li *ngFor="let c of services._embedded.services">
-    <a [ngClass]="currentServices && currentServices._links.self==c.links.self?'active':''"
+  <li *ngFor="let s of services._embedded.services" >
+    <a [ngClass]="currentServices && currentServices._links.self==s._links.self?'active':''"
        class="list-group-item"
        style="cursor: pointer"
-       (click)="onGetCollaborateur(c)">
-      {{c.name}}</a>
+       (click)="onGetCollaborateur(s)">
+      {{s.name}}</a>
   </li>
 </ul>
