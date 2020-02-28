@@ -9,8 +9,10 @@ import {CollaborateursComponent} from './collaborateurs/collaborateurs.component
 import {InscriptionComponent} from './inscription/inscription.component';
 import {LoginComponent} from './login/login.component';
 import {ServicesComponent} from './services/services.component';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
+import { ProfileComponent } from './profile/profile.component';
+import { AdminCollaborateursComponent } from './admin-collaborateurs/admin-collaborateurs.component';
 
 @NgModule({
   declarations: [
@@ -20,11 +22,13 @@ import {HttpClientModule} from '@angular/common/http';
     CollaborateursComponent,
     InscriptionComponent,
     LoginComponent,
-    ServicesComponent
+    ServicesComponent,
+    ProfileComponent,
+    AdminCollaborateursComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule, HttpClientModule, FormsModule
+    AppRoutingModule, HttpClientModule, FormsModule, ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

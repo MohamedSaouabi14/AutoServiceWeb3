@@ -5,6 +5,8 @@ import {LoginComponent} from './login/login.component';
 import {AdminServicesComponent} from './admin-services/admin-services.component';
 import {AdminUsersComponent} from './admin-users/admin-users.component';
 import {InscriptionComponent} from './inscription/inscription.component';
+import {ProfileComponent} from './profile/profile.component';
+import {AdminCollaborateursComponent} from './admin-collaborateurs/admin-collaborateurs.component';
 
 
 const routes: Routes = [
@@ -13,7 +15,9 @@ const routes: Routes = [
   {path: 'adminServices', component: AdminServicesComponent},
   {path: 'adminUsers', component: AdminUsersComponent},
   {path: 'inscription', component: InscriptionComponent},
-  {path: '', redirectTo: 'collaborateurs' , pathMatch : 'full'}
+  {path: 'profile', component: ProfileComponent},
+  {path: 'admincollaborateurs', component: AdminCollaborateursComponent},
+  {path: '', redirectTo: '/', pathMatch: 'full'}
 ];
 
 @NgModule({

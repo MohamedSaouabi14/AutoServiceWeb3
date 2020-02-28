@@ -19,6 +19,9 @@
       </form>
     </div>
     <div *ngIf="mode=='edit-ser'" class="col-md-6">
+      <div>
+        Modifier Service
+      </div>
       <form #f="ngForm" (ngSubmit)="onupdateSer(f.value)">
         <div class="form-group">
           <label class="control-label">Name</label>
@@ -27,6 +30,7 @@
         <button class="btn btn-success" type="submit">Save</button>
       </form>
     </div>
+
     <div *ngIf="mode=='list'">
       <table class="table" *ngIf="services">
         <tr>

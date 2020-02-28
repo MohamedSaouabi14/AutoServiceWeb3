@@ -8,16 +8,15 @@ import {Observable} from 'rxjs';
 })
 export class PrestationService {
   public host: string = 'http://localhost:8087';
-  private reportProgress;
-
   constructor(private http: HttpClient, private authService: AuthenticationService) { }
   getAllServices() {
-    let headers = new HttpHeaders({'authorization': 'Bearer ' + this.authService.jwt});
-    return this.http.get(this.host + '/services',{ headers : headers});
+    return this.http.get(this.host + '/services');
+  }
+  getAllCollaborateurs() {
+    return this.http.get(this.host + '/collaborateurs');
   }
   getRessource(url) {
-    let headers = new HttpHeaders({'authorization': 'Bearer ' + this.authService.jwt});
-    return this.http.get( url,{ headers : headers});
+    return this.http.get(url);
   }
   deleteRessource(url) {
     let headers = new HttpHeaders({'authorization': 'Bearer ' + this.authService.jwt});
@@ -25,7 +24,7 @@ export class PrestationService {
   }
   postRessource(url, data) {
     let headers = new HttpHeaders({'authorization': 'Bearer ' + this.authService.jwt});
-    return this.http.post(url, data , { headers : headers});
+    return this.http.post(url, data, { headers : headers});
   }
   putRessource(url, data) {
     let headers = new HttpHeaders({'authorization': 'Bearer ' + this.authService.jwt});

@@ -14,8 +14,9 @@
         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Votre éspace
           <span class="caret"></span></a>
         <ul class="dropdown-menu">
+          <li *ngIf="isUser()"><a routerLink="/profile">Votre Compte</a></li>
           <li *ngIf="isAdmin()"><a routerLink="/adminServices">Gestion des Services</a></li>
-          <li *ngIf="isUser()"><a (click)="onCollaborateursDispo()">Collaborateurs Disponibles</a></li>
+          <li *ngIf="isAdmin()"><a routerLink="/admincollaborateurs">Gestion des Collaborateurs</a></li>
           <li *ngIf="isAdmin()"><a routerLink="/adminUsers">Gestion des utilisateurs</a></li>
         </ul>
       </li>
@@ -24,7 +25,8 @@
       <li>
         <a *ngIf="!isAuthenticated()" routerLink="/login">
           <span class="glyphicon glyphicon-log-in"> Login</span> </a></li>
-      <li> <a class="btn" *ngIf="isAuthenticated()" (click)="logOut()">
+      <li>
+        <a class="btn" *ngIf="isAuthenticated()" (click)="logOut()">
         <span class="glyphicon glyphicon-log-out"> Logout</span></a></li>
       <li><div>
       </div></li>
@@ -35,7 +37,6 @@
 <div class="row">
   <div class="col-md-3">
     <app-services>
-
     </app-services>
   </div>
   <div class="col-md-6">

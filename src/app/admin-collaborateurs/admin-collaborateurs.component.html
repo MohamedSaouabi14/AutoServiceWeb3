@@ -1,0 +1,99 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    Gestion des collaborateurs
+  </div>
+  <div class="panel-body">
+    <div>
+      <button class="btn btn-success" (click)="onNewcollaborateur()">
+        <span class="glyphicon glyphicon-plus" ></span>
+      </button>
+    </div>
+    <p></p>
+    <div *ngIf="mode=='new-col'" class="col-md-6">
+      <form #f="ngForm" (ngSubmit)="onSaveCol(f.value)">
+        <div class="form-group">
+          <label class="control-label">Name</label>
+          <input type="text" name="name" ngModel class="form-control">
+        </div>
+        <button class="btn btn-success" type="submit">Save</button>
+      </form>
+    </div>
+    <div *ngIf="mode=='affecttoservice'">
+      <div class="panel-heading">
+        Affect To service
+      </div>
+      <div class="panel-body">
+        <div>
+          <label class="control-label" formControlName="colname" >{{this.currentCollaborateur.name}}</label>
+        </div>
+                <label class="control-label">Service</label>
+                <form [formGroup]="selectservice" (ngSubmit)="onSubmit()" novalidate>
+                  <div>
+                    <select class="custom-select"  formControlName="sername" (change)="changeservice($event)" ngModel>
+                      <option *ngFor="let service of services._embedded.services" [ngValue]="service.name">{{service.name}}</option>
+                    </select>
+                  </div>
+            <!--<option value="{{s.name}}" name="sername">{{s.name}}</option>-->
+                  <button class="btn btn-success" type="submit">Affecter</button>
+                </form>
+    </div>
+    </div>
+    <div *ngIf="mode=='edit-col'" class="col-md-6">
+      <div class="panel-heading">
+        Modifier Collaborateur
+      </div>
+      <div class="panel-body">
+        <form #f="ngForm" (ngSubmit)="onupdateCol(f.value)">
+          <div class="form-group">
+            <label class="control-label">Name</label>
+            <input type="text" name="name" class="form-control" [(ngModel)]="currentCollaborateur.name">
+          </div>
+          <div class="form-group">
+            <label class="control-label">Adresse</label>
+            <input type="text" name="adresse" class="form-control" [(ngModel)]="currentCollaborateur.adresse">
+          </div>
+          <div class="form-group">
+            <label class="control-label">Phone Number</label>
+            <input type="text" name="phoneNumber" class="form-control" [(ngModel)]="currentCollaborateur.phoneNumber">
+          </div>
+          <button class="btn btn-success" type="submit">Save</button>
+        </form>
+      </div>
+    </div>
+    <div *ngIf="mode=='list'">
+      <table class="table" *ngIf="collaborateurs">
+        <tr>
+          <th>Name</th>
+          <th>Adresse</th>
+          <th>Phone Number</th>
+          <th>Available</th>
+          <th>Promotion</th>
+        </tr>
+        <tr *ngFor="let c of collaborateurs._embedded.collaborateurs">
+          <td>{{c.name}}</td>
+          <td>{{c.adresse}}</td>
+          <td>{{c.phoneNumber}}</td>
+          <td>{{c.available}}</td>
+          <td>{{c.promotion}}</td>
+          <td>
+            <button class="btn btn-danger" (click)="onDeletecollaborateur(c)">
+              <span class="glyphicon glyphicon-remove" ></span>
+            </button>
+          </td>
+          <td>
+            <button class="btn btn-info" (click)="onEditcollaborateur(c)">
+              <span class="glyphicon glyphicon-check" ></span>
+            </button>
+          </td>
+          <td>
+            <button class="btn btn-info" (click)="onAffecttoservice(c)">
+              <span class="glyphicon glyphicon-check" ></span>
+            </button>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+  </div>
+  </div>
+

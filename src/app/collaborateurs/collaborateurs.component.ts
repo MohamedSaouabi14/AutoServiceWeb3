@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {PrestationService} from '../prestation.service';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {HttpEventType, HttpResponse} from '@angular/common/http';
+import {AuthenticationService} from '../authentication.service';
 
 @Component({
   selector: 'app-collaborateurs',
@@ -9,17 +10,17 @@ import {HttpEventType, HttpResponse} from '@angular/common/http';
   styleUrls: ['./collaborateurs.component.css']
 })
 export class CollaborateursComponent implements OnInit {
-  collaborateurs;
-  private editphoto: boolean;
-  private currentcollaborateur;
-  private SelectedFiles;
-  private progress;
-  private currentFileUpload;
-
-
+   collaborateurs;
+   editphoto: boolean;
+   currentcollaborateur;
+   SelectedFiles;
+   progress;
+   currentFileUpload;
+   Timestamp:number=0;
   constructor(private prestService: PrestationService ,
-              private route: ActivatedRoute, private router: Router,
-              ) {
+              private route: ActivatedRoute,
+              private router: Router,
+              private authService: AuthenticationService) {
     router.events.subscribe(event => {
       if (event instanceof NavigationEnd)  {
         let url = atob(route.snapshot.params.urlcol);
@@ -35,6 +36,7 @@ export class CollaborateursComponent implements OnInit {
     this.prestService.getRessource(url)
       .subscribe(data => {
         this.collaborateurs = data;
+        console.log(data);
       }, err => {
         console.log(err);
       });
@@ -60,11 +62,30 @@ export class CollaborateursComponent implements OnInit {
           console.log(this.progress);
         }
         else if (event instanceof HttpResponse){
-          alert('Fin  de téléchargement ... !');
+          this.Timestamp = Date.now();
         }
       }, err => {
         alert('Problème de chargement !');
     })
     this.SelectedFiles = undefined;
+  }
+
+  getTS() {
+    return this.Timestamp;
+  }
+
+  isAdmin() {
+    return this.authService.isAdmin();
+  }
+  isAuthenticated(){
+    return this.authService.isAuthenticated();
+  }
+
+  onRDV(c) {
+
+  }
+
+  onCollaborateurDetails(c) {
+
   }
 }

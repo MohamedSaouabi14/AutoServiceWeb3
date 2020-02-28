@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AuthenticationService} from './authentication.service';
 import {Router} from '@angular/router';
 
@@ -8,10 +8,9 @@ import {Router} from '@angular/router';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'AutoServiceWeb';
 
-  private currentService;
   constructor(private authService: AuthenticationService,private router: Router) {
   }
   ngOnInit(): void {
@@ -29,10 +28,5 @@ export class AppComponent {
 
   logOut() {
     this.authService.logout();
-  }
-
-  onCollaborateursDispo() {
-    this.currentService=undefined;
-    this.router.navigateByUrl('/Collaborateurs/4/0');
   }
 }

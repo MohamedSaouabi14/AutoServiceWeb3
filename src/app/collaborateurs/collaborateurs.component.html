@@ -1,40 +1,48 @@
 <div *ngIf="collaborateurs">
   <div  *ngFor="let c of collaborateurs._embedded.collaborateurs">
-    <div class="col-md-9">
-      <div class="panel panel-default">
+    <div class="col-md-push-6">
+      <div class="panel panel-default heigted">
         <div class="panel-heading">
           {{c.name}}
         </div>
         <div class="panel-body">
-          <table>
-            <tr>
-              <td rowspan="3">
-                <img height="100" src="{{this.prestService.host+'/photoColl/'+c.id}}"/>
-              <p>
-                <button (click)="onEditPhoto(c)">
-                  <span class="glyphicon glyphicon-edit"></span>
-                </button></p>
-                <p *ngIf="editphoto && currentcollaborateur==c">
-                  <input type="file" (change)="onSelectedFile($event)">
-                  <button class="btn btn-success" (click)="uploadPhoto()">Upload</button>
-                {{progress}}
-                </p>
-              </td>
-            </tr>
-            <tr>
-              <td><span class="glyphicon glyphicon-home"></span>{{c.adresse}}</td>
-              <td></td>
-            </tr>
-            <tr>
-              <td><span class="glyphicon glyphicon-phone"></span>{{c.phoneNumber}}</td>
-              <td></td>
-            </tr>
-          </table>
+                <img class="img-rounded img-responsive " (click)="onCollaborateurDetails(c)" [src]="this.prestService.host+'/photoColl/'+c.id+'?ts='+getTS()"/>
+                 <div *ngIf="isAuthenticated() && isAdmin()" >
+                     <button (click)="onEditPhoto(c)">
+                       <span class="glyphicon glyphicon-edit"></span>
+                     </button>
+                     <p *ngIf="editphoto && currentcollaborateur==c">
+                     <input type="file" (change)="onSelectedFile($event)">
+                     <button class="btn btn-success" (click)="uploadPhoto()">Upload</button>
+                     {{progress}}
+                   </p>
+                 </div>
+            <div>
+              <label><span class="glyphicon glyphicon-home"></span>{{c.adresse}}</label>
+            </div>
+            <div>
+              <label><span class="glyphicon glyphicon-phone"></span>{{c.phoneNumber}}</label>
+            </div>
+            <div>
+              <div *ngIf="c.promotion">
+                <img src="../../assets/images/promo.png"  height="30px"/>
+              </div>
+              <div *ngIf="c.available">
+                <img src="../../assets/images/valable.png"  height="30px" />
+              </div>
+            </div>
+            <div>
+          <form #f="ngForm" (ngSubmit)="onRDV(c)">
+            <button>
+              <label class="control-label">RDV :</label>
+              <img src="../../assets/images/calendar.png" height="15px"/>
+            </button>
+          </form>
+        </div>
+      </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
 <!--<table class="table table-striped">
   <tr>
     <th>Name</th><th>Adresse</th>

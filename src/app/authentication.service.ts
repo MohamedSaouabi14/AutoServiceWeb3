@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {JwtHelperService} from '@auth0/angular-jwt';
 
 @Injectable({
@@ -10,33 +10,40 @@ export class AuthenticationService {
   jwt: string;
   username: string;
   roles: Array<string>;
-  constructor(private http: HttpClient) { }
+
+  constructor(private http: HttpClient) {
+  }
+
   register(data) {
-    return this.http.post(this.host2 + '/register', data, { observe: 'response'});
+    return this.http.post(this.host2 + '/register', data, {observe: 'response'});
   }
+
   login(data) {
-    return this.http.post(this.host2 + '/login', data, { observe: 'response'});
+    return this.http.post(this.host2 + '/login', data,  {observe: 'response'});
   }
-
-
   saveToken(jwt: string) {
     localStorage.setItem('token', jwt);
     this.jwt = jwt;
     this.parseJWT();
   }
+
   parseJWT() {
     let jwtHelper = new JwtHelperService();
     let objJWT = jwtHelper.decodeToken(this.jwt)
     this.username = objJWT.obj;
     this.roles = objJWT.roles;
+    console.log(this.username, this.roles);
 
   }
+
   isAdmin() {
     return this.roles.indexOf('ADMIN') >= 0;
   }
+
   isUser() {
     return this.roles.indexOf('USER') >= 0;
   }
+
   isAuthenticated() {
     return this.roles && (this.isAdmin() || this.isUser());
   }
@@ -50,6 +57,7 @@ export class AuthenticationService {
     localStorage.removeItem('token');
     this.initParams();
   }
+
   initParams() {
     this.jwt = undefined;
     this.username = undefined;

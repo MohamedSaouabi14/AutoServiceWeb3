@@ -9,7 +9,7 @@ import {PrestationService} from '../prestation.service';
 export class AdminServicesComponent implements OnInit {
 
   services;
-  mode;
+  mode = 'list';
   constructor(private prestService: PrestationService) { }
 
   ngOnInit() {
@@ -55,7 +55,7 @@ export class AdminServicesComponent implements OnInit {
     this.prestService.getRessource(ser._links.self.href)
       .subscribe(data => {
         this.currentService = data;
-        this.mode = 'edit-ser ';
+        this.mode = 'edit-ser';
       }, err => {
         console.log(err);
       });
@@ -65,7 +65,7 @@ export class AdminServicesComponent implements OnInit {
     this.prestService.putRessource(this.currentService._links.self.href, data)
       .subscribe(data => {
         this.onGetAllServices();
-        this.mode = 'list ';
+        this.mode = 'list';
       }, err => {
         console.log(err);
       });
