@@ -116,7 +116,7 @@ export class AdminCollaborateursComponent implements OnInit {
     } else {
       alert(JSON.stringify(this.selectservice.value));
       let colname:string = this.currentCollaborateur.name;
-      let sername:string = this.selectservice.get('sername');
+      let sername:string = this.get.serName();
       let data={colname,sername};
       this.Affectcoltoservice(data);
     }
