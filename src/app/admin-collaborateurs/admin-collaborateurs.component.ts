@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {PrestationService} from '../prestation.service';
-import {FormBuilder, Validators} from '@angular/forms';
+import {FormBuilder, Validators,FormGroup} from '@angular/forms';
 import {Router} from '@angular/router';
 import {stringify} from 'querystring';
 
@@ -15,13 +15,16 @@ export class AdminCollaborateursComponent implements OnInit {
   public mode = 'list';
   private isSubmitted = false;
   currentCollaborateur;
-
+  colForm: FormGroup;
+  val;
   constructor(private prestService: PrestationService, public fb: FormBuilder, private router: Router) { }
 
   ngOnInit() {
     this.onGetAllCollaborateurs();
     this.onGetAllServices();
   }
+
+
   onGetAllCollaborateurs() {
     this.prestService.getAllCollaborateurs()
       .subscribe(data => {
@@ -67,7 +70,8 @@ export class AdminCollaborateursComponent implements OnInit {
   }
 
   selectservice = this.fb.group({
-    sername: ['',[Validators.required]]
+     sername: ['',[Validators.required]],
+     colname: ['',[Validators.required]]
                                });
   private data;
   onEditcollaborateur(col) {
@@ -111,22 +115,20 @@ export class AdminCollaborateursComponent implements OnInit {
   }
   onSubmit(){
     this.isSubmitted = true;
+
     if (!this.selectservice.valid){
       return false;
     } else {
-      alert(JSON.stringify(this.selectservice.value));
-      let colname:string = this.currentCollaborateur.name;
-      let sername:string = this.get.serName();
-      let data={colname,sername};
-      this.Affectcoltoservice(data);
+    alert(JSON.stringify(this.selectservice.value));
+    this.Affectcoltoservice(this.selectservice.value);
     }
   }
-  affectCol(data){
+  /*affectCol(data){
     return this.prestService.postRessource(this.prestService.host + '/addcollaborateur', data);
-  }
+  }*/
 
   Affectcoltoservice(data){
-    this.affectCol(data)
+     this.prestService.postRessource(this.prestService.host + '/addcollaborateur', data)
       .subscribe(data => {
       console.log(data);
       this.router.navigateByUrl('admincollaborateurs');

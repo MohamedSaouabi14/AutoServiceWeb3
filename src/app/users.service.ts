@@ -6,7 +6,7 @@ import {AuthenticationService} from './authentication.service';
   providedIn: 'root'
 })
 export class UsersService {
-  public host3: string = 'http://localhost:8080';
+  public host3: string = 'http://localhost:8081';
   constructor(private http: HttpClient, private authService: AuthenticationService) { }
   getAllUsers() {
     let headers = new HttpHeaders({'authorization': 'Bearer ' + this.authService.jwt});

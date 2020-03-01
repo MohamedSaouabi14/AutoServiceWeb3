@@ -7,7 +7,7 @@ import {Observable} from 'rxjs';
   providedIn: 'root'
 })
 export class PrestationService {
-  public host: string = 'http://localhost:8087';
+  public host: string = 'http://localhost:8085';
   constructor(private http: HttpClient, private authService: AuthenticationService) { }
   getAllServices() {
     return this.http.get(this.host + '/services');
