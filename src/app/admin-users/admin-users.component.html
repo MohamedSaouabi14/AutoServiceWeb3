@@ -7,7 +7,7 @@
       <form #f="ngForm" (ngSubmit)="onaddRole(f.value)">
         <div class="form-group">
           <label class="control-label">Name</label>
-          <input type="text" name="username" class="form-control" [(ngModel)]="currentUser.username">
+          <input [(ngModel)]="currentUser.username" class="form-control" name="username" type="text">
           <label class="control-label">Type de compte</label>
           <select class="form-group" name="rolename" ngModel>
             <option value="ADMIN">Administrateur</option>
@@ -24,13 +24,13 @@
         <tr *ngFor="let u of appUsers._embedded.appUsers">
           <td>{{u.username}}</td>
           <td>
-            <button class="btn btn-danger" (click)="onDeleteUser(u)">
-              <span class="glyphicon glyphicon-remove" ></span>
+            <button (click)="onDeleteUser(u)" class="btn btn-danger">
+              <span class="glyphicon glyphicon-remove"></span>
             </button>
           </td>
           <td>
-            <button class="btn btn-info" (click)="onEditUser(u)">
-              <span class="glyphicon glyphicon-check" ></span>
+            <button (click)="onEditUser(u)" class="btn btn-info">
+              <span class="glyphicon glyphicon-check"></span>
             </button>
           </td>
         </tr>

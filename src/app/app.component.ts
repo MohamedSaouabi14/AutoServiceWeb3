@@ -11,17 +11,21 @@ import {Router} from '@angular/router';
 export class AppComponent implements OnInit {
   title = 'AutoServiceWeb';
 
-  constructor(private authService: AuthenticationService,private router: Router) {
+  constructor(private authService: AuthenticationService, private router: Router) {
   }
+
   ngOnInit(): void {
     this.authService.loadToken();
   }
+
   isAdmin() {
     return this.authService.isAdmin();
   }
+
   isUser() {
     return this.authService.isUser();
   }
+
   isAuthenticated() {
     return this.authService.isAuthenticated();
   }

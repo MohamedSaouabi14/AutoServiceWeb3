@@ -10,11 +10,15 @@ export class AdminServicesComponent implements OnInit {
 
   services;
   mode = 'list';
-  constructor(private prestService: PrestationService) { }
+  currentService;
+
+  constructor(private prestService: PrestationService) {
+  }
 
   ngOnInit() {
     this.onGetAllServices();
   }
+
   onGetAllServices() {
     this.prestService.getAllServices()
       .subscribe(data => {
@@ -26,7 +30,9 @@ export class AdminServicesComponent implements OnInit {
 
   onDeleteservice(ser) {
     let c = confirm('Etes vous sure?');
-    if (!c) return;
+    if (!c) {
+      return;
+    }
     this.prestService.deleteRessource(ser._links.self.href)
       .subscribe(data => {
         this.mode = 'list';
@@ -50,7 +56,7 @@ export class AdminServicesComponent implements OnInit {
         console.log(err);
       });
   }
-  currentService;
+
   onEditservice(ser) {
     this.prestService.getRessource(ser._links.self.href)
       .subscribe(data => {

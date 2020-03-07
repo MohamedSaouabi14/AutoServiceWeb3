@@ -8,9 +8,12 @@ import {Router} from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  constructor(private authService: AuthenticationService, private router: Router) { }
   private jwt;
   private currentuser;
+
+  constructor(private authService: AuthenticationService, private router: Router) {
+  }
+
   ngOnInit() {
   }
 
@@ -26,13 +29,15 @@ export class LoginComponent implements OnInit {
       });
   }
 
-  isAdmin(){
+  isAdmin() {
     return this.authService.isAdmin();
   }
-  isUser(){
+
+  isUser() {
     return this.authService.isUser();
   }
-  isAuthenticated(){
+
+  isAuthenticated() {
     return this.authService.isAuthenticated();
   }
 }

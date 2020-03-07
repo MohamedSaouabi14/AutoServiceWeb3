@@ -6,11 +6,11 @@
     <ul class="nav navbar-nav">
       <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Acceuil<span class="caret"></span></a>
         <ul class="dropdown-menu">
-          <li ><a routerLink="/adminCategories">Présentation</a></li>
-          <li ><a routerLink="/adminProducts">Contact</a></li>
+          <li><a routerLink="/adminCategories">Présentation</a></li>
+          <li><a routerLink="/adminProducts">Contact</a></li>
         </ul>
       </li>
-      <li class="dropdown" *ngIf="isAuthenticated()">
+      <li *ngIf="isAuthenticated()" class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Votre éspace
           <span class="caret"></span></a>
         <ul class="dropdown-menu">
@@ -26,10 +26,12 @@
         <a *ngIf="!isAuthenticated()" routerLink="/login">
           <span class="glyphicon glyphicon-log-in"> Login</span> </a></li>
       <li>
-        <a class="btn" *ngIf="isAuthenticated()" (click)="logOut()">
-        <span class="glyphicon glyphicon-log-out"> Logout</span></a></li>
-      <li><div>
-      </div></li>
+        <a (click)="logOut()" *ngIf="isAuthenticated()" class="btn">
+          <span class="glyphicon glyphicon-log-out"> Logout</span></a></li>
+      <li>
+        <div>
+        </div>
+      </li>
     </ul>
   </div>
 </nav>

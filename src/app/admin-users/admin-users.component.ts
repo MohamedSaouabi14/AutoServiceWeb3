@@ -10,12 +10,17 @@ import {Router} from '@angular/router';
 })
 export class AdminUsersComponent implements OnInit {
   appUsers;
-  mode='list';
+  mode = 'list';
   host2: string = 'http://localhost:8080';
-  constructor(private usersService: UsersService,private authenticationService: AuthenticationService,private router: Router) { }
+  currentUser;
+
+  constructor(private usersService: UsersService, private authenticationService: AuthenticationService, private router: Router) {
+  }
+
   ngOnInit() {
     this.onGetAllUsers();
   }
+
   onGetAllUsers() {
     this.usersService.getAllUsers()
       .subscribe(data => {
@@ -24,23 +29,26 @@ export class AdminUsersComponent implements OnInit {
         console.log(error);
       });
   }
+
   onSaveUsers(data) {
     let url = this.usersService.host3 + '/appUsers';
     this.usersService.postRessource(url, data)
-      .subscribe(data =>{
+      .subscribe(data => {
         this.onGetAllUsers();
-        this.mode='list';
-      },err=>{
+        this.mode = 'list';
+      }, err => {
         console.log(err);
       });
   }
 
   onDeleteUser(u) {
     let c = confirm('Etes vous sure?');
-    if (!c) return;
+    if (!c) {
+      return;
+    }
     this.usersService.deleteRessource(u._links.self.href)
       .subscribe(data => {
-        this.mode='list';
+        this.mode = 'list';
         this.onGetAllUsers();
       }, error => {
         console.log(error);
@@ -48,22 +56,24 @@ export class AdminUsersComponent implements OnInit {
   }
 
   onNewUsers() {
-    this.mode='new-user';
+    this.mode = 'new-user';
   }
-  currentUser;
+
   onEditUser(u) {
     this.usersService.getRessource(u._links.self.href)
       .subscribe(data => {
         this.currentUser = data;
-        this.mode='edit-user';
-      },err=>{
+        this.mode = 'edit-user';
+      }, err => {
         console.log(err);
       });
   }
+
   addRole(data) {
     return this.usersService.postRessource(this.host2 + '/addrole', data);
   }
-  onaddRole(data){
+
+  onaddRole(data) {
     this.addRole(data)
       .subscribe(resp => {
         console.log(resp);
@@ -75,10 +85,10 @@ export class AdminUsersComponent implements OnInit {
 
   onupdateUsers(data) {
     this.usersService.putRessource(this.currentUser._links.self.href, data)
-      .subscribe(data =>{
+      .subscribe(data => {
         this.onGetAllUsers();
-        this.mode='list';
-      },err=>{
+        this.mode = 'list';
+      }, err => {
         console.log(err);
       });
   }

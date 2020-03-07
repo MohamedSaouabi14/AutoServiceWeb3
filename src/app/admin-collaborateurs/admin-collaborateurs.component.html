@@ -4,8 +4,8 @@
   </div>
   <div class="panel-body">
     <div>
-      <button class="btn btn-success" (click)="onNewcollaborateur()">
-        <span class="glyphicon glyphicon-plus" ></span>
+      <button (click)="onNewcollaborateur()" class="btn btn-success">
+        <span class="glyphicon glyphicon-plus"></span>
       </button>
     </div>
     <p></p>
@@ -13,17 +13,22 @@
       <form #f="ngForm" (ngSubmit)="onSaveCol(f.value)">
         <div class="form-group">
           <label class="control-label">Name</label>
-          <input type="text" name="name" ngModel class="form-control">
+          <input class="form-control" name="name" ngModel type="text">
         </div>
         <div class="form-group">
           <label class="control-label">adresse</label>
-          <input type="text" name="adresse" ngModel class="form-control">
+          <input class="form-control" name="adresse" ngModel type="text">
         </div>
         <div class="form-group">
           <label class="control-label">Phone Number</label>
-          <input type="number" name="phoneNumber" ngModel class="form-control">
+          <input class="form-control" name="phoneNumber" ngModel type="number">
         </div>
-        <button class="btn btn-success" type="submit">Save</button>
+        <div>
+          <button class="btn btn-success" type="submit">Save</button>&nbsp;
+          <button class="btn btn-danger" type="reset">Annuler</button>&nbsp;
+          <button (click)="back()" class="btn btn-danger">Retour</button>
+        </div>
+
       </form>
     </div>
     <div *ngIf="mode=='affecttoservice'">
@@ -31,21 +36,23 @@
         Affect To service
       </div>
       <div class="panel-body">
-                <label>Service</label>
-                <form [formGroup]="selectservice" (ngSubmit)="onSubmit()" >
-                  <div class="form-group">
-                    <select class="form-control"  formControlName="sername" (change)="changeservice($event)" >
-                      <option *ngFor="let service of services._embedded.services" [ngValue]="service.name" ngModel>{{service.name}}</option>
-                    </select>
-                  </div>
-                    <div class="form-group">
-                      <input type="text" class="form-control" formControlName="colname"  placeholder="{{this.currentCollaborateur.name}}" ngModel>
-                    </div>
+        <label>Service</label>
+        <form (ngSubmit)="onSubmit()" [formGroup]="selectservice">
+          <div class="form-group">
+            <select (change)="changeservice($event)" class="form-control" formControlName="sername">
+              <option *ngFor="let service of services._embedded.services" [ngValue]="service.name"
+                      ngModel>{{service.name}}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <input class="form-control" formControlName="colname" ngModel
+                   placeholder="{{this.currentCollaborateur.name}}" type="text">
+          </div>
 
-            <!--<option value="{{s.name}}" name="sername">{{s.name}}</option>-->
-                  <button class="btn btn-success" type="submit">Affecter</button>
-                </form>
-    </div>
+          <!--<option value="{{s.name}}" name="sername">{{s.name}}</option>-->
+          <button class="btn btn-success" type="submit">Affecter</button>
+        </form>
+      </div>
     </div>
     <div *ngIf="mode=='edit-col'" class="col-md-6">
       <div class="panel-heading">
@@ -55,22 +62,23 @@
         <form #f="ngForm" (ngSubmit)="onupdateCol(f.value)">
           <div class="form-group">
             <label class="control-label">Name</label>
-            <input type="text" name="name" class="form-control" [(ngModel)]="currentCollaborateur.name">
+            <input [(ngModel)]="currentCollaborateur.name" class="form-control" name="name" type="text">
           </div>
           <div class="form-group">
             <label class="control-label">Adresse</label>
-            <input type="text" name="adresse" class="form-control" [(ngModel)]="currentCollaborateur.adresse">
+            <input [(ngModel)]="currentCollaborateur.adresse" class="form-control" name="adresse" type="text">
           </div>
           <div class="form-group">
             <label class="control-label">Phone Number</label>
-            <input type="text" name="phoneNumber" class="form-control" [(ngModel)]="currentCollaborateur.phoneNumber">
+            <input [(ngModel)]="currentCollaborateur.phoneNumber" class="form-control" name="phoneNumber" type="text">
           </div>
-          <button class="btn btn-success" type="submit">Save</button>
+          <button class="btn btn-success" type="submit">Save</button>&nbsp;
+          <button (click)="back()" class="btn btn-danger">Retour</button>
         </form>
       </div>
     </div>
     <div *ngIf="mode=='list'">
-      <table class="table" *ngIf="collaborateurs">
+      <table *ngIf="collaborateurs" class="table">
         <tr>
           <th>Name</th>
           <th>Adresse</th>
@@ -85,18 +93,24 @@
           <td>{{c.available}}</td>
           <td>{{c.promotion}}</td>
           <td>
-            <button class="btn btn-danger" (click)="onDeletecollaborateur(c)">
-              <span class="glyphicon glyphicon-remove" ></span>
+            <button (click)="onDeletecollaborateur(c)" class="btn btn-danger">
+              <span class="glyphicon glyphicon-remove"></span>
             </button>
           </td>
           <td>
-            <button class="btn btn-info" (click)="onEditcollaborateur(c)">
-              <span class="glyphicon glyphicon-erase" ></span>
+            &nbsp;
+          </td>
+          <td>
+            <button (click)="onEditcollaborateur(c)" class="btn btn-info">
+              <span class="glyphicon glyphicon-erase"></span>
             </button>
           </td>
           <td>
-            <button class="btn btn-info" (click)="onAffecttoservice(c)">
-              <span class="glyphicon glyphicon-edit" ></span>
+            &nbsp;
+          </td>
+          <td>
+            <button (click)="onAffecttoservice(c)" class="btn btn-info">
+              <span class="glyphicon glyphicon-edit"></span>
             </button>
           </td>
         </tr>
@@ -104,5 +118,5 @@
     </div>
 
   </div>
-  </div>
+</div>
 

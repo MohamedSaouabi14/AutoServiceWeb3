@@ -9,9 +9,12 @@ import {Router} from '@angular/router';
 })
 export class ServicesComponent implements OnInit {
 
-  constructor(private prestService: PrestationService, private router: Router) { }
   services;
   currentServices;
+
+  constructor(private prestService: PrestationService, private router: Router) {
+  }
+
   ngOnInit() {
     this.prestService.getAllServices()
       .subscribe(data => {

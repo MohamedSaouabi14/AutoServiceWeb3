@@ -9,8 +9,11 @@ import {Router} from '@angular/router';
 })
 export class InscriptionComponent implements OnInit {
 
-  constructor(private authService: AuthenticationService, private router: Router) { }
   private jwt;
+
+  constructor(private authService: AuthenticationService, private router: Router) {
+  }
+
   ngOnInit() {
   }
 
@@ -22,12 +25,15 @@ export class InscriptionComponent implements OnInit {
         console.log(err);
       });
   }
+
   isAdmin() {
     return this.authService.isAdmin();
   }
+
   isUser() {
     return this.authService.isUser();
   }
+
   isAuthenticated() {
     return this.authService.isAuthenticated();
   }

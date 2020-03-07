@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {PrestationService} from '../prestation.service';
-import {FormBuilder, Validators,FormGroup} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
-import {stringify} from 'querystring';
 
 @Component({
   selector: 'app-admin-collaborateurs',
@@ -11,19 +10,29 @@ import {stringify} from 'querystring';
 })
 export class AdminCollaborateursComponent implements OnInit {
   public collaborateurs;
-  private services;
   public mode = 'list';
-  private isSubmitted = false;
   currentCollaborateur;
   colForm: FormGroup;
   val;
-  constructor(private prestService: PrestationService, public fb: FormBuilder, private router: Router) { }
+  selectservice = this.fb.group({
+    sername: ['', [Validators.required]],
+    colname: ['', [Validators.required]]
+  });
+  private services;
+  private isSubmitted = false;
+  private data;
+
+  constructor(private prestService: PrestationService, public fb: FormBuilder, private router: Router) {
+  }
+
+  get serName() {
+    return this.selectservice.get('sername');
+  }
 
   ngOnInit() {
     this.onGetAllCollaborateurs();
     this.onGetAllServices();
   }
-
 
   onGetAllCollaborateurs() {
     this.prestService.getAllCollaborateurs()
@@ -33,6 +42,7 @@ export class AdminCollaborateursComponent implements OnInit {
         console.log(error);
       });
   }
+
   onGetAllServices() {
     this.prestService.getAllServices()
       .subscribe(data => {
@@ -44,7 +54,9 @@ export class AdminCollaborateursComponent implements OnInit {
 
   onDeletecollaborateur(col) {
     let c = confirm('Etes vous sure?');
-    if (!c) return;
+    if (!c) {
+      return;
+    }
     this.prestService.deleteRessource(col._links.self.href)
       .subscribe(data => {
         this.mode = 'list';
@@ -58,6 +70,10 @@ export class AdminCollaborateursComponent implements OnInit {
     this.mode = 'new-col';
   }
 
+  back() {
+    this.mode = 'list';
+  }
+
   onSaveCol(data) {
     let url = this.prestService.host + '/collaborateurs';
     this.prestService.postRessource(url, data)
@@ -69,11 +85,6 @@ export class AdminCollaborateursComponent implements OnInit {
       });
   }
 
-  selectservice = this.fb.group({
-     sername: ['',[Validators.required]],
-     colname: ['',[Validators.required]]
-                               });
-  private data;
   onEditcollaborateur(col) {
     this.prestService.getRessource(col._links.self.href)
       .subscribe(data => {
@@ -96,7 +107,7 @@ export class AdminCollaborateursComponent implements OnInit {
 
   onAffecttoservice(col) {
     this.prestService.getRessource(col._links.self.href)
-      .subscribe( data => {
+      .subscribe(data => {
         this.currentCollaborateur = data;
         this.mode = 'affecttoservice';
       }, error => {
@@ -105,35 +116,34 @@ export class AdminCollaborateursComponent implements OnInit {
   }
 
   changeservice(e) {
-    console.log(e.value)
-    this.serName.setValue(e.target.value,{
+    console.log(e.value);
+    this.serName.setValue(e.target.value, {
       onlySelf: true
     });
   }
-  get serName(){
-    return this.selectservice.get('sername');
-  }
-  onSubmit(){
+
+  onSubmit() {
     this.isSubmitted = true;
 
-    if (!this.selectservice.valid){
+    if (!this.selectservice.valid) {
       return false;
     } else {
-    alert(JSON.stringify(this.selectservice.value));
-    this.Affectcoltoservice(this.selectservice.value);
+      alert(JSON.stringify(this.selectservice.value));
+      this.Affectcoltoservice(this.selectservice.value);
     }
   }
+
   /*affectCol(data){
     return this.prestService.postRessource(this.prestService.host + '/addcollaborateur', data);
   }*/
 
-  Affectcoltoservice(data){
-     this.prestService.postRessource(this.prestService.host + '/addcollaborateur', data)
+  Affectcoltoservice(data) {
+    this.prestService.postRessource(this.prestService.host + '/addcollaborateur', data)
       .subscribe(data => {
-      console.log(data);
-      this.router.navigateByUrl('admincollaborateurs');
-    }, err => {
-      console.log(err);
-    });
+        console.log(data);
+        this.router.navigateByUrl('admincollaborateurs');
+      }, err => {
+        console.log(err);
+      });
   }
 }

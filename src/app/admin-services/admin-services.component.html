@@ -4,8 +4,8 @@
   </div>
   <div class="panel-body">
     <div>
-      <button class="btn btn-success" (click)="onNewservices()">
-        <span class="glyphicon glyphicon-plus" ></span>
+      <button (click)="onNewservices()" class="btn btn-success">
+        <span class="glyphicon glyphicon-plus"></span>
       </button>
     </div>
     <p></p>
@@ -13,7 +13,7 @@
       <form #f="ngForm" (ngSubmit)="onSaveSer(f.value)">
         <div class="form-group">
           <label class="control-label">Name</label>
-          <input type="text" name="name" ngModel class="form-control">
+          <input class="form-control" name="name" ngModel type="text">
         </div>
         <button class="btn btn-success" type="submit">Save</button>
       </form>
@@ -25,27 +25,27 @@
       <form #f="ngForm" (ngSubmit)="onupdateSer(f.value)">
         <div class="form-group">
           <label class="control-label">Name</label>
-          <input type="text" name="name" class="form-control" [(ngModel)]="currentService.name">
+          <input [(ngModel)]="currentService.name" class="form-control" name="name" type="text">
         </div>
         <button class="btn btn-success" type="submit">Save</button>
       </form>
     </div>
 
     <div *ngIf="mode=='list'">
-      <table class="table" *ngIf="services">
+      <table *ngIf="services" class="table">
         <tr>
           <th>Name</th>
         </tr>
         <tr *ngFor="let c of services._embedded.services">
           <td>{{c.name}}</td>
           <td>
-            <button class="btn btn-danger" (click)="onDeleteservice(c)">
-              <span class="glyphicon glyphicon-remove" ></span>
+            <button (click)="onDeleteservice(c)" class="btn btn-danger">
+              <span class="glyphicon glyphicon-remove"></span>
             </button>
           </td>
           <td>
-            <button class="btn btn-info" (click)="onEditservice(c)">
-              <span class="glyphicon glyphicon-check" ></span>
+            <button (click)="onEditservice(c)" class="btn btn-info">
+              <span class="glyphicon glyphicon-check"></span>
             </button>
           </td>
         </tr>

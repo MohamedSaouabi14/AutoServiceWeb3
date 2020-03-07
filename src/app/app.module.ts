@@ -11,8 +11,8 @@ import {LoginComponent} from './login/login.component';
 import {ServicesComponent} from './services/services.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
-import { ProfileComponent } from './profile/profile.component';
-import { AdminCollaborateursComponent } from './admin-collaborateurs/admin-collaborateurs.component';
+import {ProfileComponent} from './profile/profile.component';
+import {AdminCollaborateursComponent} from './admin-collaborateurs/admin-collaborateurs.component';
 
 @NgModule({
   declarations: [
@@ -33,4 +33,5 @@ import { AdminCollaborateursComponent } from './admin-collaborateurs/admin-colla
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {JwtHelperService} from '@auth0/angular-jwt';
 
 @Injectable({
@@ -19,8 +19,9 @@ export class AuthenticationService {
   }
 
   login(data) {
-    return this.http.post(this.host2 + '/login', data,  {observe: 'response'});
+    return this.http.post(this.host2 + '/login', data, {observe: 'response'});
   }
+
   saveToken(jwt: string) {
     localStorage.setItem('token', jwt);
     this.jwt = jwt;
@@ -29,7 +30,7 @@ export class AuthenticationService {
 
   parseJWT() {
     let jwtHelper = new JwtHelperService();
-    let objJWT = jwtHelper.decodeToken(this.jwt)
+    let objJWT = jwtHelper.decodeToken(this.jwt);
     this.username = objJWT.obj;
     this.roles = objJWT.roles;
     console.log(this.username, this.roles);
