@@ -11,7 +11,7 @@ import {Router} from '@angular/router';
 export class AdminUsersComponent implements OnInit {
   appUsers;
   mode = 'list';
-  host2: string = 'http://localhost:8080';
+  host2: string = 'http://localhost:8081';
   currentUser;
 
   constructor(private usersService: UsersService, private authenticationService: AuthenticationService, private router: Router) {

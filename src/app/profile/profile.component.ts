@@ -9,11 +9,11 @@ import {JwtHelperService} from '@auth0/angular-jwt';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  private user;
-  private username;
-  private roles: Array<string>;
+  public user;
+  public username;
+  public roles: Array<string>;
 
-  constructor(private usersService: UsersService, private authService: AuthenticationService) {
+  constructor(public usersService: UsersService, public authService: AuthenticationService) {
   }
 
   ngOnInit() {

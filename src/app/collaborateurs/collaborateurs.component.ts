@@ -18,7 +18,7 @@ export class CollaborateursComponent implements OnInit {
   currentFileUpload;
   Timestamp: number = 0;
 
-  constructor(private prestService: PrestationService,
+  constructor(public prestService: PrestationService,
               private route: ActivatedRoute,
               private router: Router,
               private authService: AuthenticationService) {

@@ -18,11 +18,11 @@ export class AdminCollaborateursComponent implements OnInit {
     sername: ['', [Validators.required]],
     colname: ['', [Validators.required]]
   });
-  private services;
-  private isSubmitted = false;
-  private data;
+  public services;
+  public isSubmitted = false;
+  public data;
 
-  constructor(private prestService: PrestationService, public fb: FormBuilder, private router: Router) {
+  constructor(public prestService: PrestationService, public fb: FormBuilder, public router: Router) {
   }
 
   get serName() {
