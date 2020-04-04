@@ -10,78 +10,75 @@ import {HttpEventType, HttpResponse} from '@angular/common/http';
   styleUrls: ['./admin-publicites.component.css']
 })
 export class AdminPublicitesComponent implements OnInit {
-  promotions;
-  editphoto: boolean;
-  currentpromotion;
-  SelectedFiles;
-  progress;
-  currentFileUpload;
-  Timestamp: number = 0;
-  constructor(public promopubService: PromopubService,
-              private route: ActivatedRoute,
-              private router: Router,
-              private authService: AuthenticationService) {
-    router.events.subscribe(event => {
-      if (event instanceof NavigationEnd) {
-        let url = atob(route.snapshot.params.urlcol);
-        console.log(url);
-        this.getpromotions(url);
-      }
-    });
+  publicites;
+  mode = 'list';
+  currentpublicite;
+
+  constructor(private promopubService: PromopubService) {
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.onGetAllpublicites();
   }
 
-  getpromotions(url) {
-    this.promopubService.getRessource(url)
+  onGetAllpublicites() {
+    this.promopubService.getAllPublicites()
       .subscribe(data => {
-        this.promotions = data;
-        console.log(data);
+        this.publicites = data;
+      }, error => {
+        console.log(error);
+      });
+  }
+
+  onDeletepublicite(pub) {
+    let c = confirm('Etes vous sure?');
+    if (!c) {
+      return;
+    }
+    this.promopubService.deleteRessource(pub._links.self.href)
+      .subscribe(data => {
+        this.mode = 'list';
+        this.onGetAllpublicites();
+      }, error => {
+        console.log(error);
+      });
+  }
+
+  onNewpublicites() {
+    this.mode = 'new-pub';
+  }
+  back() {
+    this.mode = 'list';
+  }
+
+  onSavepub(data) {
+    let url = this.promopubService.host + '/publicites';
+    this.promopubService.postRessource(url, data)
+      .subscribe(data => {
+        this.onGetAllpublicites();
+        this.mode = 'list';
       }, err => {
         console.log(err);
       });
-
   }
 
-  onEditPhoto(c) {
-    this.currentpromotion = c;
-    this.editphoto = true;
-  }
-
-  onSelectedFile(event) {
-    this.SelectedFiles = event.target.files;
-  }
-
-  uploadPhoto() {
-    this.progress = 0;
-    this.currentFileUpload = this.SelectedFiles.item(0);
-    this.promopubService.uploadPhoto(this.currentFileUpload, this.currentpromotion.id)
-      .subscribe(event => {
-        if (event.type === HttpEventType.UploadProgress) {
-          this.progress = Math.round(100 * event.loaded / event.total);
-          console.log(this.progress);
-        } else if (event instanceof HttpResponse) {
-          this.Timestamp = Date.now();
-        }
+  onEditpublicite(pub) {
+    this.promopubService.getRessource(pub._links.self.href)
+      .subscribe(data => {
+        this.currentpublicite = data;
+        this.mode = 'edit-pub';
       }, err => {
-        alert('Problème de chargement !');
+        console.log(err);
       });
-    this.SelectedFiles = undefined;
   }
 
-  getTS() {
-    return this.Timestamp;
-  }
-
-  isAdmin() {
-    return this.authService.isAdmin();
-  }
-
-  isAuthenticated() {
-    return this.authService.isAuthenticated();
-  }
-  onPublicitesDetails(c) {
-
+  onupdatepub(data) {
+    this.promopubService.putRessource(this.currentpublicite._links.self.href, data)
+      .subscribe(data => {
+        this.onGetAllpublicites();
+        this.mode = 'list';
+      }, err => {
+        console.log(err);
+      });
   }
 }
