@@ -1,0 +1,83 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    Gestion des promotions
+  </div>
+  <div class="panel-body">
+    <div>
+      <button (click)="onNewpromotions()" class="btn btn-success">
+        <span class="glyphicon glyphicon-plus"></span>
+      </button>
+    </div>
+    <p></p>
+    <div *ngIf="mode=='new-pro'" class="col-md-6">
+      <form #f="ngForm" (ngSubmit)="onSavepro(f.value)">
+        <div class="form-group">
+          <label class="control-label">Name</label>
+          <input class="form-control" name="name" ngModel type="text">
+        </div>
+        <div class="form-group">
+          <label class="control-label">nameCollaborateur</label>
+          <input class="form-control" name="nameCollaborateur" ngModel type="text">
+        </div>
+        <div class="form-group">
+          <input type="checkbox" id="valable" name="valable"
+                 checked>
+          <label for="valable">Available</label>
+        </div>
+        <div>
+          <button class="btn btn-success" type="submit">Save</button>&nbsp;
+          <button class="btn btn-danger" type="reset">Annuler</button>&nbsp;
+          <button (click)="back()" class="btn btn-danger">Retour</button>
+        </div>
+
+      </form>
+    </div>
+    <div *ngIf="mode=='edit-pro'" class="col-md-6">
+      <div class="panel-heading">
+        Modifier Promotion
+      </div>
+      <div class="panel-body">
+        <form #f="ngForm" (ngSubmit)="onupdatepro(f.value)">
+          <div class="form-group">
+            <label class="control-label">Name</label>
+            <input [(ngModel)]="currentpromotions.name" class="form-control" name="name" type="text">
+          </div>
+          <div class="form-group">
+            <label class="control-label">Name Collaborateur</label>
+            <input [(ngModel)]="currentpromotions.nameCollaborateur" class="form-control" name="nameCollaborateur" type="text">
+          </div>
+          <button class="btn btn-success" type="submit">Save</button>&nbsp;
+          <button (click)="back()" class="btn btn-danger">Retour</button>
+        </form>
+      </div>
+    </div>
+    <div *ngIf="mode=='list'">
+      <table *ngIf="promotions" class="table">
+        <tr>
+          <th>Name</th>
+          <th>Name Collaborateur</th>
+        </tr>
+        <tr *ngFor="let c of promotions._embedded.promotions">
+          <td>{{c.name}}</td>
+          <td>{{c.nameCollaborateur}}</td>
+          <td>
+            <button (click)="onDeletepromotion(c)" class="btn btn-danger">
+              <span class="glyphicon glyphicon-remove"></span>
+            </button>
+          </td>
+          <td>
+            &nbsp;
+          </td>
+          <td>
+            <button (click)="onEditpromotion(c)" class="btn btn-info">
+              <span class="glyphicon glyphicon-erase"></span>
+            </button>
+          </td>
+          <td>&nbsp;
+          </td>
+        </tr>
+      </table>
+    </div>
+
+  </div>
+</div>

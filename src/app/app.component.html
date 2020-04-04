@@ -6,8 +6,8 @@
     <ul class="nav navbar-nav">
       <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Acceuil<span class="caret"></span></a>
         <ul class="dropdown-menu">
-          <li><a routerLink="/adminCategories">Présentation</a></li>
-          <li><a routerLink="/adminProducts">Contact</a></li>
+          <li><a routerLink="">Présentation</a></li>
+          <li><a routerLink="">Contact</a></li>
         </ul>
       </li>
       <li *ngIf="isAuthenticated()" class="dropdown">
@@ -15,9 +15,14 @@
           <span class="caret"></span></a>
         <ul class="dropdown-menu">
           <li *ngIf="isUser()"><a routerLink="/profile">Votre Compte</a></li>
+          <li *ngIf="isUser()"><a routerLink="/formation">Formations</a></li>
+          <li *ngIf="isUser()"><a routerLink="/promotion">Promotions</a></li>
           <li *ngIf="isAdmin()"><a routerLink="/adminServices">Gestion des Services</a></li>
           <li *ngIf="isAdmin()"><a routerLink="/admincollaborateurs">Gestion des Collaborateurs</a></li>
           <li *ngIf="isAdmin()"><a routerLink="/adminUsers">Gestion des utilisateurs</a></li>
+          <li *ngIf="isAdmin()"><a routerLink="/adminformation">Gestion des Formations</a></li>
+          <li *ngIf="isAdmin()"><a routerLink="/adminpromotion">Gestion des Promotions</a></li>
+          <li *ngIf="isAdmin()"><a routerLink="/adminpublicite">Gestion des Publicités</a></li>
         </ul>
       </li>
     </ul>

@@ -7,6 +7,11 @@ import {AdminUsersComponent} from './admin-users/admin-users.component';
 import {InscriptionComponent} from './inscription/inscription.component';
 import {ProfileComponent} from './profile/profile.component';
 import {AdminCollaborateursComponent} from './admin-collaborateurs/admin-collaborateurs.component';
+import {AdminPromotionsComponent} from './admin-promotions/admin-promotions.component';
+import {AdminFormationsComponent} from './admin-formations/admin-formations.component';
+import {AdminPublicitesComponent} from './admin-publicites/admin-publicites.component';
+import {PromotionsComponent} from './promotions/promotions.component';
+import {FormationsComponent} from './formations/formations.component';
 
 
 const routes: Routes = [
@@ -17,6 +22,11 @@ const routes: Routes = [
   {path: 'inscription', component: InscriptionComponent},
   {path: 'profile', component: ProfileComponent},
   {path: 'admincollaborateurs', component: AdminCollaborateursComponent},
+  {path: 'adminformation', component: AdminFormationsComponent},
+  {path: 'adminpromotion', component: AdminPromotionsComponent},
+  {path: 'adminpublicite', component: AdminPublicitesComponent},
+  {path: 'promotion', component: PromotionsComponent},
+  {path: 'formation', component: FormationsComponent},
   {path: '', redirectTo: '/', pathMatch: 'full'}
 ];
 

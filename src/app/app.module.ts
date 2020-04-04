@@ -13,6 +13,11 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {ProfileComponent} from './profile/profile.component';
 import {AdminCollaborateursComponent} from './admin-collaborateurs/admin-collaborateurs.component';
+import { AdminPromotionsComponent } from './admin-promotions/admin-promotions.component';
+import { AdminPublicitesComponent } from './admin-publicites/admin-publicites.component';
+import { AdminFormationsComponent } from './admin-formations/admin-formations.component';
+import { FormationsComponent } from './formations/formations.component';
+import { PromotionsComponent } from './promotions/promotions.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +29,12 @@ import {AdminCollaborateursComponent} from './admin-collaborateurs/admin-collabo
     LoginComponent,
     ServicesComponent,
     ProfileComponent,
-    AdminCollaborateursComponent
+    AdminCollaborateursComponent,
+    AdminPromotionsComponent,
+    AdminPublicitesComponent,
+    AdminFormationsComponent,
+    FormationsComponent,
+    PromotionsComponent
   ],
   imports: [
     BrowserModule,
