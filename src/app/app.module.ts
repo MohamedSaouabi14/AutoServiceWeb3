@@ -18,6 +18,8 @@ import { AdminPublicitesComponent } from './admin-publicites/admin-publicites.co
 import { AdminFormationsComponent } from './admin-formations/admin-formations.component';
 import { FormationsComponent } from './formations/formations.component';
 import { PromotionsComponent } from './promotions/promotions.component';
+import { PublicitesComponent } from './publicites/publicites.component';
+import {PdfViewerModule} from 'ng2-pdf-viewer';
 
 @NgModule({
   declarations: [
@@ -34,10 +36,12 @@ import { PromotionsComponent } from './promotions/promotions.component';
     AdminPublicitesComponent,
     AdminFormationsComponent,
     FormationsComponent,
-    PromotionsComponent
+    PromotionsComponent,
+    PublicitesComponent
   ],
   imports: [
     BrowserModule,
+    PdfViewerModule,
     AppRoutingModule, HttpClientModule, FormsModule, ReactiveFormsModule
   ],
   providers: [],

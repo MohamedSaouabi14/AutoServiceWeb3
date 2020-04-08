@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import {PromopubService} from '../promopub.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {AuthenticationService} from '../authentication.service';
+import {HttpEventType, HttpResponse} from '@angular/common/http';
+import {FormationService} from '../formation.service';
+
 
 @Component({
   selector: 'app-formations',
@@ -7,9 +13,69 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FormationsComponent implements OnInit {
 
-  constructor() { }
+  formations;
+  editpdf: boolean;
+  currentformation;
+  SelectedFiles;
+  progress;
+  currentFileUpload;
+  Timestamp = 0;
+  constructor(public formationService: FormationService,
+              private route: ActivatedRoute,
+              private router: Router,
+              private authService: AuthenticationService) {}
 
   ngOnInit(): void {
+    this.onGetAllFormation();
   }
 
+  onGetAllFormation() {
+    this.formationService.getAllFormations()
+      .subscribe(data => {
+        this.formations = data;
+      }, error => {
+        console.log(error);
+      });
+  }
+
+  onEditPdf(c) {
+    this.currentformation = c;
+    this.editpdf = true;
+  }
+
+  onSelectedFile(event) {
+    this.SelectedFiles = event.target.files;
+  }
+
+  uploadPdff() {
+    this.progress = 0;
+    this.currentFileUpload = this.SelectedFiles.item(0);
+    this.formationService.uploadPdf(this.currentFileUpload, this.currentformation.id)
+      .subscribe(event => {
+        if (event.type === HttpEventType.UploadProgress) {
+          this.progress = Math.round(100 * event.loaded / event.total);
+          console.log(this.progress);
+        } else if (event instanceof HttpResponse) {
+          this.Timestamp = Date.now();
+        }
+      }, err => {
+        alert('Problème de chargement !');
+      });
+    this.SelectedFiles = undefined;
+  }
+
+  getTS() {
+    return this.Timestamp;
+  }
+
+  isAdmin() {
+    return this.authService.isAdmin();
+  }
+
+  isAuthenticated() {
+    return this.authService.isAuthenticated();
+  }
+  onFormationDetails(c) {
+
+  }
 }

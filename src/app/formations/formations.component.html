@@ -1,1 +1,24 @@
-<p>formations works!</p>
+<div *ngIf="formations">
+  <div *ngFor="let fr of formations._embedded.formations">
+    <div class="col-md-push-6">
+      <div class="panel panel-default heigted">
+        <div class="panel-heading">
+          {{fr.name}}
+        </div>
+        <div class="panel-body" >
+          <pdf-viewer  [src]="this.formationService.host+'/pdfformation/'+fr.id+'?ts='+getTS()"
+                [render-text]="true" style="display: block" ></pdf-viewer>
+          <div *ngIf="isAuthenticated() && isAdmin()">
+            <button (click)="onEditPdf(fr)">
+              <span class="glyphicon glyphicon-edit"></span>
+            </button>
+            <p *ngIf="editpdf && currentformation==fr">
+              <input (change)="onSelectedFile($event)" type="file">
+              <button (click)="uploadPdff()" class="btn btn-success">Upload</button>
+              {{progress}}
+            </p>
+          </div>
+          </div>
+    </div>
+  </div>
+  </div></div>

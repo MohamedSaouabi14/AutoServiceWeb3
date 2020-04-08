@@ -7,19 +7,14 @@ import {Observable} from 'rxjs';
   providedIn: 'root'
 })
 export class FormationService {
-  public host: string = 'http://localhost:8082';
+  public host: string = 'http://localhost:8083';
 
   constructor(private http: HttpClient, private authService: AuthenticationService) {
   }
 
-  getAllPublicites() {
-    return this.http.get(this.host + '/publicites');
+  getAllFormations() {
+    return this.http.get(this.host + '/formations');
   }
-
-  getAllPromotions() {
-    return this.http.get(this.host + '/promotions');
-  }
-
   getRessource(url) {
     return this.http.get(url);
   }
@@ -40,13 +35,13 @@ export class FormationService {
   }
 
 
-  uploadPhotoCol(file: File, idf): Observable<HttpEvent<{}>> {
+  uploadPdf(file: File, idf): Observable<HttpEvent<{}>> {
     let formdata: FormData = new FormData();
     formdata.append('file', file);
     if (this.authService.jwt == null) {
       this.authService.loadToken();
     }
-    const req = new HttpRequest('POST', this.host + '/uploadPhoto/' + idf, formdata, {
+    const req = new HttpRequest('POST', this.host + '/uploadpdf/' + idf, formdata, {
       reportProgress: true,
       responseType: 'text',
       headers: new HttpHeaders({'authorization': 'Bearer ' + this.authService.jwt})

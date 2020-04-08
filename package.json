@@ -22,9 +22,13 @@
     "@auth0/angular-jwt": "^4.0.0",
     "bootstrap": "^3.4.1",
     "jquery": "^3.4.1",
+    "ng-simple-slideshow": "^1.2.9",
+    "ng2-image-viewer": "^3.0.5",
+    "ngx-extended-pdf-viewer": "^3.0.0-beta.7",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
-    "zone.js": "~0.10.2"
+    "zone.js": "~0.10.2",
+    "ng2-pdf-viewer": "latest"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.900.5",

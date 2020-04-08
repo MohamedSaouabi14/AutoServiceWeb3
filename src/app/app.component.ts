@@ -11,9 +11,8 @@ import {PromopubService} from './promopub.service';
 })
 export class AppComponent implements OnInit {
   title = 'AutoServiceWeb';
-  private promotions;
 
-  constructor(private authService: AuthenticationService, private promopubService: PromopubService, private router: Router) {
+  constructor(private authService: AuthenticationService, private router: Router) {
   }
 
   ngOnInit(): void {

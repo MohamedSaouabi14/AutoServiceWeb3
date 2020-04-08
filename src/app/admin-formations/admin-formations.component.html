@@ -1,1 +1,88 @@
-<p>admin-formations works!</p>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    Gestion des formations
+  </div>
+  <div class="panel-body">
+    <div>
+      <button (click)="onNewformation()" class="btn btn-success">add formation
+        <span class="glyphicon glyphicon-plus"></span>
+      </button>
+    </div>
+    <p></p>
+    <div *ngIf="mode=='new-for'" class="col-md-6">
+      <form #f="ngForm" (ngSubmit)="onSavefor(f.value)">
+        <div class="form-group">
+          <label class="control-label">Name</label>
+          <input class="form-control" name="name" ngModel type="text">
+        </div>
+        <div class="form-group">
+          <label class="control-label">Type</label>
+          <input class="form-control" name="type" ngModel type="text">
+        </div>
+        <div class="form-group">
+          <label class="control-label">Coach</label>
+          <input class="form-control" name="nameCoach" ngModel type="text">
+        </div>
+        <div>
+          <button class="btn btn-success" type="submit">Save</button>&nbsp;
+          <button class="btn btn-danger" type="reset">Annuler</button>&nbsp;
+          <button (click)="back()" class="btn btn-danger">Retour</button>
+        </div>
+
+      </form>
+    </div>
+    <div *ngIf="mode=='edit-for'" class="col-md-6">
+      <div class="panel-heading">
+        Modifier Promotion
+      </div>
+      <div class="panel-body">
+        <form #f="ngForm" (ngSubmit)="onupdatefor(f.value)">
+          <div class="form-group">
+            <label class="control-label">Name</label>
+            <input [(ngModel)]="currentformation.name" class="form-control" name="name" type="text">
+          </div>
+          <div class="form-group">
+            <label class="control-label">Type</label>
+            <input [(ngModel)]="currentformation.type" class="form-control" name="type" type="text">
+          </div>
+          <div class="form-group">
+            <label class="control-label">Coach</label>
+            <input [(ngModel)]="currentformation.nameCoach" class="form-control" name="nameCoach" type="text">
+          </div>
+          <button class="btn btn-success" type="submit">Save</button>&nbsp;
+          <button (click)="back()" class="btn btn-danger">Back</button>
+        </form>
+      </div>
+    </div>
+    <div *ngIf="mode=='list'">
+      <table *ngIf="formations" class="table">
+        <tr>
+          <th>Name</th>
+          <th>type</th>
+          <th>Coach</th>
+        </tr>
+        <tr *ngFor="let c of formations._embedded.formations">
+          <td>{{c.name}}</td>
+          <td>{{c.type}}</td>
+          <td>{{c.nameCoach}}</td>
+          <td>
+            <button (click)="onDeleteformation(c)" class="btn btn-danger">
+              <span class="glyphicon glyphicon-remove"></span>
+            </button>
+          </td>
+          <td>
+            &nbsp;
+          </td>
+          <td>
+            <button (click)="onEditformation(c)" class="btn btn-info">
+              <span class="glyphicon glyphicon-erase"></span>
+            </button>
+          </td>
+          <td>&nbsp;
+          </td>
+        </tr>
+      </table>
+    </div>
+
+  </div>
+</div>

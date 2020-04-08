@@ -17,6 +17,11 @@
           <li *ngIf="isUser()"><a routerLink="/profile">Votre Compte</a></li>
           <li *ngIf="isUser()"><a routerLink="/formation">Formations</a></li>
           <li *ngIf="isUser()"><a routerLink="/promotion">Promotions</a></li>
+        </ul></li>
+      <li *ngIf="isAdmin()" class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Espace administrateur
+          <span class="caret"></span></a>
+        <ul class="dropdown-menu">
           <li *ngIf="isAdmin()"><a routerLink="/adminServices">Gestion des Services</a></li>
           <li *ngIf="isAdmin()"><a routerLink="/admincollaborateurs">Gestion des Collaborateurs</a></li>
           <li *ngIf="isAdmin()"><a routerLink="/adminUsers">Gestion des utilisateurs</a></li>
@@ -27,11 +32,11 @@
       </li>
     </ul>
     <ul class="nav navbar-nav pull-right">
-      <li>
-        <a *ngIf="!isAuthenticated()" routerLink="/login">
+      <li >
+        <a *ngIf="!isAuthenticated()" routerLink="/login" >
           <span class="glyphicon glyphicon-log-in"> Login</span> </a></li>
-      <li>
-        <a (click)="logOut()" *ngIf="isAuthenticated()" class="btn">
+      <li  >
+        <a *ngIf="isAuthenticated()" (click)="logOut()" class="btn">
           <span class="glyphicon glyphicon-log-out"> Logout</span></a></li>
       <li>
         <div>
