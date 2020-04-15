@@ -76,4 +76,8 @@ export class AdminServicesComponent implements OnInit {
         console.log(err);
       });
   }
+
+  back() {
+    this.mode = 'list';
+  }
 }

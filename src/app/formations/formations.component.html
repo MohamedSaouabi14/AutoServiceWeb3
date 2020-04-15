@@ -1,24 +1,45 @@
 <div *ngIf="formations">
-  <div *ngFor="let fr of formations._embedded.formations">
-    <div class="col-md-push-6">
+  <div *ngFor="let c of formations._embedded.formations">
+    <div class="col-md-push-12">
       <div class="panel panel-default heigted">
         <div class="panel-heading">
-          {{fr.name}}
+          {{c.name}}
         </div>
-        <div class="panel-body" >
-          <pdf-viewer  [src]="this.formationService.host+'/pdfformation/'+fr.id+'?ts='+getTS()"
-                [render-text]="true" style="display: block" ></pdf-viewer>
+        <div class="panel-body">
+          <img (click)="onFormationDetails(c)" [src]="this.formationService.host+'/photofor/'+c.id+'?ts='+getTS()"
+               class="img-rounded img-responsive "/>
           <div *ngIf="isAuthenticated() && isAdmin()">
-            <button (click)="onEditPdf(fr)">
+            <button (click)="onEditPhoto(c)">
               <span class="glyphicon glyphicon-edit"></span>
             </button>
-            <p *ngIf="editpdf && currentformation==fr">
+            <p *ngIf="editphoto && currentformation==c">
               <input (change)="onSelectedFile($event)" type="file">
-              <button (click)="uploadPdff()" class="btn btn-success">Upload</button>
+              <button (click)="uploadPhoto()" class="btn btn-success">Upload</button>
               {{progress}}
             </p>
           </div>
+          <div>
+            <label><span class="glyphicon glyphicon-education"></span>{{c.type}}</label>
           </div>
+          <div>
+            <label><span class="glyphicon glyphicon-book"></span>{{c.nameCoach}}</label>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-  </div></div>
+
+  <!--
+  <pdf-viewer  [src]="this.formationService.host+'/pdfformation/'+fr.id+'?ts='+getTS()"
+                  [render-text]="true">
+            </pdf-viewer>
+            <div *ngIf="isAuthenticated() && isAdmin()">
+              <button (click)="onEditPdf(fr)">
+                <span class="glyphicon glyphicon-edit"></span>
+              </button>
+              <p *ngIf="editpdf && currentformation==fr">
+                <input (change)="onSelectedFile($event)" type="file">
+                <button (click)="uploadPdff()" class="btn btn-success">Upload</button>
+                {{progress}}
+              </p></div>
+  -->

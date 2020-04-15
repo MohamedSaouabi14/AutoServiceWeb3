@@ -42,13 +42,13 @@ export class PromopubService {
   }
 
 
-  uploadPhoto(file: File, idpr): Observable<HttpEvent<{}>> {
+  uploadPhotoPub(file: File, idpr): Observable<HttpEvent<{}>> {
     let formdata: FormData = new FormData();
     formdata.append('file', file);
     if (this.authService.jwt == null) {
       this.authService.loadToken();
     }
-    const req = new HttpRequest('POST', this.host + '/uploadPhoto/' + idpr, formdata, {
+    const req = new HttpRequest('POST', this.host + '/uploadPhotopub/' + idpr, formdata, {
       reportProgress: true,
       responseType: 'text',
       headers: new HttpHeaders({'authorization': 'Bearer ' + this.authService.jwt})

@@ -14,7 +14,7 @@ import {FormationService} from '../formation.service';
 export class FormationsComponent implements OnInit {
 
   formations;
-  editpdf: boolean;
+  editphoto: boolean;
   currentformation;
   SelectedFiles;
   progress;
@@ -38,19 +38,19 @@ export class FormationsComponent implements OnInit {
       });
   }
 
-  onEditPdf(c) {
+  onEditPhoto(c) {
     this.currentformation = c;
-    this.editpdf = true;
+    this.editphoto = true;
   }
 
   onSelectedFile(event) {
     this.SelectedFiles = event.target.files;
   }
 
-  uploadPdff() {
+  uploadPhoto() {
     this.progress = 0;
     this.currentFileUpload = this.SelectedFiles.item(0);
-    this.formationService.uploadPdf(this.currentFileUpload, this.currentformation.id)
+    this.formationService.uploadPhoto(this.currentFileUpload, this.currentformation.id)
       .subscribe(event => {
         if (event.type === HttpEventType.UploadProgress) {
           this.progress = Math.round(100 * event.loaded / event.total);
@@ -76,6 +76,7 @@ export class FormationsComponent implements OnInit {
     return this.authService.isAuthenticated();
   }
   onFormationDetails(c) {
-
+    let url = btoa(c._links.formation.href);
+    this.router.navigateByUrl('for-details/' + url);
   }
 }

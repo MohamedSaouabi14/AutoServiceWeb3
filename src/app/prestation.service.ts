@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpEvent, HttpHeaders, HttpRequest} from '@angular/common/http';
 import {AuthenticationService} from './authentication.service';
 import {Observable} from 'rxjs';
+import {Collaborateur} from './model/collaborateur';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,9 @@ export class PrestationService {
 
   getRessource(url) {
     return this.http.get(url);
+  }
+  getCollaborateur(url):Observable<Collaborateur>{
+    return this.http.get<Collaborateur>(url);
   }
 
   deleteRessource(url) {

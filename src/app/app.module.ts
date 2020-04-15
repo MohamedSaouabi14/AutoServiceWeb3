@@ -18,8 +18,10 @@ import { AdminPublicitesComponent } from './admin-publicites/admin-publicites.co
 import { AdminFormationsComponent } from './admin-formations/admin-formations.component';
 import { FormationsComponent } from './formations/formations.component';
 import { PromotionsComponent } from './promotions/promotions.component';
-import { PublicitesComponent } from './publicites/publicites.component';
-import {PdfViewerModule} from 'ng2-pdf-viewer';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { ColldetailsComponent } from './colldetails/colldetails.component';
+import { FormationdetailsComponent } from './formationdetails/formationdetails.component';
+import {PublicitesComponent} from './publicites/publicites.component';
 
 @NgModule({
   declarations: [
@@ -37,12 +39,13 @@ import {PdfViewerModule} from 'ng2-pdf-viewer';
     AdminFormationsComponent,
     FormationsComponent,
     PromotionsComponent,
-    PublicitesComponent
+    ColldetailsComponent,
+    FormationdetailsComponent,
+    PublicitesComponent,
   ],
   imports: [
-    BrowserModule,
-    PdfViewerModule,
-    AppRoutingModule, HttpClientModule, FormsModule, ReactiveFormsModule
+    BrowserModule, AppRoutingModule, PdfViewerModule,
+  HttpClientModule, FormsModule, ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

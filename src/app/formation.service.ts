@@ -35,13 +35,13 @@ export class FormationService {
   }
 
 
-  uploadPdf(file: File, idf): Observable<HttpEvent<{}>> {
+  uploadPhoto(file: File, idf): Observable<HttpEvent<{}>> {
     let formdata: FormData = new FormData();
     formdata.append('file', file);
     if (this.authService.jwt == null) {
       this.authService.loadToken();
     }
-    const req = new HttpRequest('POST', this.host + '/uploadpdf/' + idf, formdata, {
+    const req = new HttpRequest('POST', this.host + '/uploadPhoto/' + idf, formdata, {
       reportProgress: true,
       responseType: 'text',
       headers: new HttpHeaders({'authorization': 'Bearer ' + this.authService.jwt})

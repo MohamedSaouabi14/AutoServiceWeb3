@@ -9,7 +9,7 @@
       </button>
     </div>
     <p></p>
-    <div *ngIf="mode=='new-for'" class="col-md-6">
+    <div *ngIf="mode=='new-for'" class="col-md-9">
       <form #f="ngForm" (ngSubmit)="onSavefor(f.value)">
         <div class="form-group">
           <label class="control-label">Name</label>
@@ -49,8 +49,11 @@
             <label class="control-label">Coach</label>
             <input [(ngModel)]="currentformation.nameCoach" class="form-control" name="nameCoach" type="text">
           </div>
-          <button class="btn btn-success" type="submit">Save</button>&nbsp;
-          <button (click)="back()" class="btn btn-danger">Back</button>
+          <div>
+            <button class="btn btn-success" type="submit">Save</button>&nbsp;
+            <button class="btn btn-danger" type="reset">Annuler</button>&nbsp;
+            <button (click)="back()" class="btn btn-danger">Retour</button>
+          </div>
         </form>
       </div>
     </div>

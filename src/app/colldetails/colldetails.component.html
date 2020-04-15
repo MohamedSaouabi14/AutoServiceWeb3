@@ -1,0 +1,66 @@
+<div *ngIf="currentcollaborateur">
+  <div class="panel panel-default" *ngIf="mode==0">
+   <div class="panel-heading">Fiche Collaborateur : {{currentcollaborateur.name}}
+     <span class="glyphicon glyphicon-edit pull-right btn" (click)="onEditCollaborateur()"></span>
+   </div>
+    <div class="panel-body">
+      <div class="col-md-5">
+        <img class="img-thumbnail" [src]="this.prestService.host+'/photoColl/'+currentcollaborateur.id+'?ts='+getTS()"/>
+        <div *ngIf="this.authService.isAdmin()">
+          <button *ngIf="!editphoto" (click)="onEditPhoto(currentcollaborateur)">
+            <span class="glyphicon glyphicon-edit"></span>
+          </button>
+          <span *ngIf="editphoto">
+             <input (change)="onSelectedFile($event)" type="file">
+              <button (click)="uploadPhoto()" class="btn btn-success btn-sm">
+                <span class="glyphicon glyphicon-upload"></span>
+              </button>
+            {{progress}}
+          </span>
+          <div>
+            <label><span class="glyphicon glyphicon-home"></span>{{currentcollaborateur.adresse}}</label>
+          </div>
+          <div>
+            <label><span class="glyphicon glyphicon-phone"></span>{{currentcollaborateur.phoneNumber}}</label>
+          </div>
+          <div>
+            <div *ngIf="currentcollaborateur.promotion">
+              <img height="30px" src="../../assets/images/promo.png"/>
+            </div>
+            <div *ngIf="currentcollaborateur.available">
+              <img height="30px" src="../../assets/images/valable.png"/>
+            </div>
+          </div>
+          <div>
+            <form #f="ngForm" (ngSubmit)="onRDV(currentcollaborateur)">
+              <button>
+                <label class="control-label">RDV :</label>
+                <img height="15px" src="../../assets/images/calendar.png"/>
+              </button>
+            </form>
+          </div>
+          </div>
+        </div>
+      <div class="col-md-7">
+        <div class="panel panel-default" style="">
+          <div class="panel-body">
+            <label>Adresse : {{currentcollaborateur.adresse}}</label>
+          </div>
+          <div class="panel-body">
+            <label>Description :{{currentcollaborateur.description}}</label>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  <div *ngIf="mode==1">
+    <form #f="ngForm" (ngSubmit)="onUpdateCollaborateur(f.value)">
+      <div class="form-group">
+        <label class="control-label">Name:</label>
+        <input type="text" name="name" ngModel [(ngModel)]="currentcollaborateur.name" class="">
+      </div>
+
+    </form>
+  </div>
+  </div>
+

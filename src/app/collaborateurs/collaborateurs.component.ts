@@ -88,6 +88,8 @@ export class CollaborateursComponent implements OnInit {
   }
 
   onCollaborateurDetails(c) {
-
+    let url = btoa(c._links.collaborateur.href);
+    this.router.navigateByUrl('col-details/' + url);
   }
+
 }

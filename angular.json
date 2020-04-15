@@ -125,5 +125,8 @@
       }
     }
   },
-  "defaultProject": "AutoServiceWeb"
+  "defaultProject": "AutoServiceWeb",
+  "cli": {
+    "analytics": true
+  }
 }

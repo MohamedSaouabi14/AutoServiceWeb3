@@ -12,6 +12,9 @@ import {AdminFormationsComponent} from './admin-formations/admin-formations.comp
 import {AdminPublicitesComponent} from './admin-publicites/admin-publicites.component';
 import {PromotionsComponent} from './promotions/promotions.component';
 import {FormationsComponent} from './formations/formations.component';
+import {ColldetailsComponent} from './colldetails/colldetails.component';
+import {FormationdetailsComponent} from './formationdetails/formationdetails.component';
+import {PublicitesComponent} from './publicites/publicites.component';
 
 
 const routes: Routes = [
@@ -27,6 +30,9 @@ const routes: Routes = [
   {path: 'adminpublicite', component: AdminPublicitesComponent},
   {path: 'promotion', component: PromotionsComponent},
   {path: 'formation', component: FormationsComponent},
+  {path: 'publicites/urlpub', component: PublicitesComponent},
+  {path: 'col-details/:url', component: ColldetailsComponent},
+  {path: 'for-details/:url', component: FormationdetailsComponent},
   {path: '', redirectTo: '/', pathMatch: 'full'}
 ];
 

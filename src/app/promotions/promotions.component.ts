@@ -44,24 +44,6 @@ export class PromotionsComponent implements OnInit {
   onSelectedFile(event) {
     this.SelectedFiles = event.target.files;
   }
-
-  uploadPhoto() {
-    this.progress = 0;
-    this.currentFileUpload = this.SelectedFiles.item(0);
-    this.promopubService.uploadPhoto(this.currentFileUpload, this.currentpromotion.id)
-      .subscribe(event => {
-        if (event.type === HttpEventType.UploadProgress) {
-          this.progress = Math.round(100 * event.loaded / event.total);
-          console.log(this.progress);
-        } else if (event instanceof HttpResponse) {
-          this.Timestamp = Date.now();
-        }
-      }, err => {
-        alert('Problème de chargement !');
-      });
-    this.SelectedFiles = undefined;
-  }
-
   getTS() {
     return this.Timestamp;
   }
