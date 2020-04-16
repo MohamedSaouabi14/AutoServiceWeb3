@@ -15,6 +15,7 @@ import {FormationsComponent} from './formations/formations.component';
 import {ColldetailsComponent} from './colldetails/colldetails.component';
 import {FormationdetailsComponent} from './formationdetails/formationdetails.component';
 import {PublicitesComponent} from './publicites/publicites.component';
+import {CaddiesComponent} from './caddies/caddies.component';
 
 
 const routes: Routes = [
@@ -33,6 +34,7 @@ const routes: Routes = [
   {path: 'publicites/urlpub', component: PublicitesComponent},
   {path: 'col-details/:url', component: ColldetailsComponent},
   {path: 'for-details/:url', component: FormationdetailsComponent},
+  {path: 'caddies', component: CaddiesComponent},
   {path: '', redirectTo: '/', pathMatch: 'full'}
 ];
 

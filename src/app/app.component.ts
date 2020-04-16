@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthenticationService} from './authentication.service';
-import {Router} from '@angular/router';
-import {PromopubService} from './promopub.service';
+import {CaddyService} from './caddy.service';
 
 
 @Component({
@@ -11,9 +10,8 @@ import {PromopubService} from './promopub.service';
 })
 export class AppComponent implements OnInit {
   title = 'AutoServiceWeb';
-  private promotions;
 
-  constructor(private authService: AuthenticationService, private promopubService: PromopubService, private router: Router) {
+  constructor(public authService: AuthenticationService, public caddyService: CaddyService) {
   }
 
   ngOnInit(): void {

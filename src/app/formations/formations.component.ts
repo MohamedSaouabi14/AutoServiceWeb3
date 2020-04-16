@@ -4,6 +4,8 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {AuthenticationService} from '../authentication.service';
 import {HttpEventType, HttpResponse} from '@angular/common/http';
 import {FormationService} from '../formation.service';
+import {Formation} from '../model/formation';
+import {CaddyService} from '../caddy.service';
 
 
 @Component({
@@ -20,10 +22,12 @@ export class FormationsComponent implements OnInit {
   progress;
   currentFileUpload;
   Timestamp = 0;
+  f: Formation;
   constructor(public formationService: FormationService,
               private route: ActivatedRoute,
               private router: Router,
-              private authService: AuthenticationService) {}
+              private authService: AuthenticationService,
+              public caddyService: CaddyService){}
 
   ngOnInit(): void {
     this.onGetAllFormation();
@@ -78,5 +82,9 @@ export class FormationsComponent implements OnInit {
   onFormationDetails(c) {
     let url = btoa(c._links.formation.href);
     this.router.navigateByUrl('for-details/' + url);
+  }
+
+  onAddFormationToCaddy(f: Formation) {
+   this.caddyService.addFormationToCaddy(f);
   }
 }

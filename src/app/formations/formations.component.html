@@ -1,28 +1,42 @@
 <div *ngIf="formations">
-  <div *ngFor="let c of formations._embedded.formations">
-    <div class="col-md-push-12">
+  <div *ngFor="let f of formations._embedded.formations">
+    <div class="col-md-5">
       <div class="panel panel-default heigted">
         <div class="panel-heading">
-          {{c.name}}
+          {{f.name}}
         </div>
         <div class="panel-body">
-          <img (click)="onFormationDetails(c)" [src]="this.formationService.host+'/photofor/'+c.id+'?ts='+getTS()"
+          <img (click)="onFormationDetails(f)" [src]="this.formationService.host+'/photofor/'+f.id+'?ts='+getTS()"
                class="img-rounded img-responsive "/>
           <div *ngIf="isAuthenticated() && isAdmin()">
-            <button (click)="onEditPhoto(c)">
+            <button (click)="onEditPhoto(f)">
               <span class="glyphicon glyphicon-edit"></span>
             </button>
-            <p *ngIf="editphoto && currentformation==c">
+            <p *ngIf="editphoto && currentformation==f">
               <input (change)="onSelectedFile($event)" type="file">
               <button (click)="uploadPhoto()" class="btn btn-success">Upload</button>
               {{progress}}
             </p>
           </div>
           <div>
-            <label><span class="glyphicon glyphicon-education"></span>{{c.type}}</label>
+            <label><span class="glyphicon glyphicon-calendar"></span>{{f.date}}</label>
           </div>
           <div>
-            <label><span class="glyphicon glyphicon-book"></span>{{c.nameCoach}}</label>
+            <label><span class="glyphicon glyphicon-education"></span>{{f.type}}</label>
+          </div>
+          <div>
+            <label><span class="glyphicon glyphicon-book"></span>{{f.nameCoach}}</label>
+          </div>
+          <div>
+            <label><span class="glyphicon glyphicon-euro"></span>{{f.price}} dt</label>
+          </div>
+          <div>
+            <form #f= "ngForm" (ngSubmit)="onAddFormationToCaddy(f)" >
+              <button>
+                <img height="25px" src="../../assets/images/caddy.png">
+              </button>
+            </form>
+
           </div>
         </div>
       </div>

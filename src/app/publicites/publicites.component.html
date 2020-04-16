@@ -1,21 +1,24 @@
 <div *ngIf="publicites">
-  <div *ngFor="let p of publicites._embedded.publicites">
-    <div class="panel-body">
-  <img  [src]="this.prpubService.host+'/photoPub/'+p.id+'?ts='+getTS()"
-        class="img-rounded img-responsive "/>
-      <div *ngIf="isAuthenticated() && isAdmin()">
-        <button (click)="onEditPhoto(p)">
-          <span class="glyphicon glyphicon-edit"></span>
-        </button>
-        <p *ngIf="editphoto && currentpublicite==p">
-          <input (change)="onSelectedFile($event)" type="file">
-          <button (click)="uploadPhoto()" class="btn btn-success">Upload</button>
-          {{progress}}
-        </p>
+  <div class="col-md-push-2">
+    <div *ngFor="let p of publicites._embedded.publicites">
+      <div class="panel-body">
+        <img  [src]="this.prpubService.host+'/photoPub/'+p.id+'?ts='+getTS()"
+              class="img-rounded img-responsive " height="100px"/>
+        <div *ngIf="isAuthenticated() && isAdmin()">
+          <button (click)="onEditPhoto(p)">
+            <span class="glyphicon glyphicon-edit"></span>
+          </button>
+          <p *ngIf="editphoto && currentpublicite==p">
+            <input (change)="onSelectedFile($event)" type="file">
+            <button (click)="uploadPhoto()" class="btn btn-success">Upload</button>
+            {{progress}}
+          </p>
+        </div>
       </div>
-  </div>
+    </div>
   </div>
 </div>
+
 
 
 

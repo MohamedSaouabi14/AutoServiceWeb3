@@ -22,6 +22,7 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { ColldetailsComponent } from './colldetails/colldetails.component';
 import { FormationdetailsComponent } from './formationdetails/formationdetails.component';
 import {PublicitesComponent} from './publicites/publicites.component';
+import { CaddiesComponent } from './caddies/caddies.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import {PublicitesComponent} from './publicites/publicites.component';
     ColldetailsComponent,
     FormationdetailsComponent,
     PublicitesComponent,
+    CaddiesComponent,
   ],
   imports: [
     BrowserModule, AppRoutingModule, PdfViewerModule,

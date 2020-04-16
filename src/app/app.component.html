@@ -10,18 +10,20 @@
           <li><a routerLink="">Contact</a></li>
         </ul>
       </li>
-      <li *ngIf="isAuthenticated()" class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Votre éspace
+      <li><a routerLink="/caddies">Panier </a></li>
+      <li *ngIf="isAuthenticated()" class="dropdown" >
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#" >Votre éspace
           <span class="caret"></span></a>
         <ul class="dropdown-menu">
           <li *ngIf="isUser()"><a routerLink="/profile">Votre Compte</a></li>
           <li *ngIf="isUser()"><a routerLink="/formation">Formations</a></li>
           <li *ngIf="isUser()"><a routerLink="/promotion">Promotions</a></li>
         </ul>
-          <li *ngIf="isAuthenticated() && isAdmin()" class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Espace Administrateur
-              <span class="caret"></span></a>
-            <ul class="dropdown-menu">
+      </li>
+      <li *ngIf="isAuthenticated() && isAdmin()" class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Espace Administrateur
+          <span class="caret"></span></a>
+        <ul class="dropdown-menu">
           <li *ngIf="isAdmin()"><a routerLink="/adminServices">Gestion des Services</a></li>
           <li *ngIf="isAdmin()"><a routerLink="/admincollaborateurs">Gestion des Collaborateurs</a></li>
           <li *ngIf="isAdmin()"><a routerLink="/adminUsers">Gestion des utilisateurs</a></li>
@@ -33,14 +35,15 @@
     </ul>
     <ul class="nav navbar-nav pull-right">
       <li>
+        <a>{{caddyService.getCurrentCaddy().name}} | {{caddyService.getCurrentCaddy().items.size}}</a>
+      </li>
+      <li>
         <a *ngIf="!isAuthenticated()" routerLink="/login">
-          <span class="glyphicon glyphicon-log-in"> Login</span> </a></li>
+          <span class="glyphicon glyphicon-log-in"> Login</span> </a>
+      </li>
       <li>
         <a (click)="logOut()" *ngIf="isAuthenticated()" class="btn">
-          <span class="glyphicon glyphicon-log-out"> Logout</span></a></li>
-      <li>
-        <div>
-        </div>
+          <span class="glyphicon glyphicon-log-out"> Logout</span></a>
       </li>
     </ul>
   </div>
@@ -51,13 +54,13 @@
     <app-services>
     </app-services>
   </div>
-  <div class="col-md-6">
+  <div class="col-md-3">
     <app-publicites>
-
     </app-publicites>
-    <router-outlet>
-
-    </router-outlet>
   </div>
+<div class="col-md-6">
+  <router-outlet>
+  </router-outlet>
+</div>
 </div>
 

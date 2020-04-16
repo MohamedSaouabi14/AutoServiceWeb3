@@ -23,6 +23,14 @@
           <label class="control-label">Coach</label>
           <input class="form-control" name="nameCoach" ngModel type="text">
         </div>
+        <div class="form-group">
+          <label class="control-label">Price</label>
+          <input class="form-control" name="price" ngModel type="text">
+        </div>
+        <div class="form-group">
+          <label class="control-label">Date</label>
+          <input class="form-control" name="date" ngModel type="text">
+        </div>
         <div>
           <button class="btn btn-success" type="submit">Save</button>&nbsp;
           <button class="btn btn-danger" type="reset">Annuler</button>&nbsp;
@@ -49,6 +57,14 @@
             <label class="control-label">Coach</label>
             <input [(ngModel)]="currentformation.nameCoach" class="form-control" name="nameCoach" type="text">
           </div>
+          <div class="form-group">
+            <label class="control-label">Price</label>
+            <input [(ngModel)]="currentformation.price" class="form-control" name="price" type="text">
+          </div>
+          <div class="form-group">
+            <label class="control-label">Date</label>
+            <input [(ngModel)]="currentformation.date" class="form-control" name="date" type="text">
+          </div>
           <div>
             <button class="btn btn-success" type="submit">Save</button>&nbsp;
             <button class="btn btn-danger" type="reset">Annuler</button>&nbsp;
@@ -63,11 +79,15 @@
           <th>Name</th>
           <th>type</th>
           <th>Coach</th>
+          <th>Price</th>
+          <th>Date</th>
         </tr>
         <tr *ngFor="let c of formations._embedded.formations">
           <td>{{c.name}}</td>
           <td>{{c.type}}</td>
           <td>{{c.nameCoach}}</td>
+          <td>{{c.price}}</td>
+          <td>{{c.date}}</td>
           <td>
             <button (click)="onDeleteformation(c)" class="btn btn-danger">
               <span class="glyphicon glyphicon-remove"></span>

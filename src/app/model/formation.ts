@@ -1,9 +1,11 @@
 export interface Formation  {
   id: number;
   photoName: string;
-  nameFormation: string;
+  name: string;
   type: string;
   nameCoach: string;
+  price: number;
+  date: number;
   _links: {
     self: {
       href: string
