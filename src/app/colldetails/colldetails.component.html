@@ -18,26 +18,12 @@
             {{progress}}
           </span>
           <div>
-            <label><span class="glyphicon glyphicon-home"></span>{{currentcollaborateur.adresse}}</label>
-          </div>
-          <div>
-            <label><span class="glyphicon glyphicon-phone"></span>{{currentcollaborateur.phoneNumber}}</label>
-          </div>
-          <div>
             <div *ngIf="currentcollaborateur.promotion">
               <img height="30px" src="../../assets/images/promo.png"/>
             </div>
             <div *ngIf="currentcollaborateur.available">
               <img height="30px" src="../../assets/images/valable.png"/>
             </div>
-          </div>
-          <div>
-            <form #f="ngForm" (ngSubmit)="onRDV(currentcollaborateur)">
-              <button>
-                <label class="control-label">RDV :</label>
-                <img height="15px" src="../../assets/images/calendar.png"/>
-              </button>
-            </form>
           </div>
           </div>
         </div>
@@ -47,7 +33,7 @@
             <label>Adresse : {{currentcollaborateur.adresse}}</label>
           </div>
           <div class="panel-body">
-            <label>Description :{{currentcollaborateur.description}}</label>
+            <label>Description :{{currentcollaborateur.phoneNumber}}</label>
           </div>
         </div>
       </div>
@@ -59,7 +45,6 @@
         <label class="control-label">Name:</label>
         <input type="text" name="name" ngModel [(ngModel)]="currentcollaborateur.name" class="">
       </div>
-
     </form>
   </div>
   </div>

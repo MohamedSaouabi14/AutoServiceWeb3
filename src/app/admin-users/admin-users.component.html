@@ -10,8 +10,21 @@
           <input [(ngModel)]="currentUser.username" class="form-control" name="username" type="text">
           <label class="control-label">Type de compte</label>
           <select class="form-group" name="rolename" ngModel>
-            <option value="ADMIN">Administrateur</option>
+            <option value="admin">Administrateur</option>
           </select>
+        </div>
+        <button class="btn btn-success" type="submit">Save</button>
+      </form>
+    </div>
+    <div *ngIf="mode=='desac-user'" class="col-md-6">
+      <form #f="ngForm" (ngSubmit)="onupdateUsers(f.value)">
+        <div class="form-group">
+          <label class="control-label">Name</label>
+          <input [(ngModel)]="currentUser.username" class="form-control" name="username" type="text">
+        </div>
+        <div class="form-group">
+          <input type="checkbox" name="actived" [(ngModel)]="currentUser.actived" class="form-control">
+          <label >Activation</label>
         </div>
         <button class="btn btn-success" type="submit">Save</button>
       </form>
@@ -31,6 +44,11 @@
           <td>
             <button (click)="onEditUser(u)" class="btn btn-info">
               <span class="glyphicon glyphicon-check"></span>
+            </button>
+          </td>
+          <td>
+            <button (click)="onDesUsers(u)" class="btn btn-info">
+              <span class="glyphicon glyphicon-ban-circle"></span>
             </button>
           </td>
         </tr>

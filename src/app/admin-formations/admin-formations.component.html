@@ -74,7 +74,7 @@
       </div>
     </div>
     <div *ngIf="mode=='list'">
-      <table *ngIf="formations" class="table">
+      <table *ngIf="formations" class="table table-striped" [border]="1">
         <tr>
           <th>Name</th>
           <th>type</th>
@@ -88,20 +88,15 @@
           <td>{{c.nameCoach}}</td>
           <td>{{c.price}}</td>
           <td>{{c.date}}</td>
-          <td>
+          <td align="center">
             <button (click)="onDeleteformation(c)" class="btn btn-danger">
               <span class="glyphicon glyphicon-remove"></span>
             </button>
           </td>
-          <td>
-            &nbsp;
-          </td>
-          <td>
+          <td align="center">
             <button (click)="onEditformation(c)" class="btn btn-info">
               <span class="glyphicon glyphicon-erase"></span>
             </button>
-          </td>
-          <td>&nbsp;
           </td>
         </tr>
       </table>

@@ -54,9 +54,22 @@ export class AdminUsersComponent implements OnInit {
         console.log(error);
       });
   }
+  onupdateUsers(data) {
+    this.usersService.getRessource(data)
+      .subscribe(data => {
+        this.currentUser = data;
+        this.mode = 'list';
+        this.onGetAllUsers();
+      }, err => {
+        console.log(err);
+      });
+  }
 
   onNewUsers() {
     this.mode = 'new-user';
+  }
+  onDesUsers(u) {
+    this.mode = 'desac-user';
   }
 
   onEditUser(u) {
@@ -78,16 +91,6 @@ export class AdminUsersComponent implements OnInit {
       .subscribe(resp => {
         console.log(resp);
         this.router.navigateByUrl('/');
-      }, err => {
-        console.log(err);
-      });
-  }
-
-  onupdateUsers(data) {
-    this.usersService.putRessource(this.currentUser._links.self.href, data)
-      .subscribe(data => {
-        this.onGetAllUsers();
-        this.mode = 'list';
       }, err => {
         console.log(err);
       });

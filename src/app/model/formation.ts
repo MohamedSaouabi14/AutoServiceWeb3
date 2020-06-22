@@ -1,5 +1,5 @@
 export interface Formation  {
-  id: number;
+  id: string;
   photoName: string;
   name: string;
   type: string;
