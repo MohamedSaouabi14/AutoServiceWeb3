@@ -1,0 +1,33 @@
+<div class="panel panel-default">
+  <div class="panel-heading">{{caddyService.currentCaddyName}}</div>
+  <div class="panel-body">
+    <table border="1" class="table table-bordered">
+      <tr align="center">
+        <th>Id</th>
+        <th>Formation</th>
+        <th>Formateur</th>
+        <th>Date</th>
+        <th>Prix</th>
+      </tr>
+      <tr *ngFor="let f of caddyService.getCurrentCaddy().items.values()" align="left">
+        <td>{{f.formation.id}}</td>
+        <td>{{f.formation.name}}</td>
+        <td>{{f.formation.nameCoach}}</td>
+        <td>{{f.formation.date}}</td>
+        <td>{{f.formation.price}}</td>
+        <td align="center">
+          <button (click)="onRemoveFormationFromCaddy(caddyService.getCurrentCaddy().items.get(f.name))"
+                  class="btn btn-danger">
+            <span class="glyphicon glyphicon-remove"></span>
+          </button>
+        </td>
+      </tr>
+      <tr>
+        <th align="center" colspan="3">Total</th>
+        <th>{{caddyService.getTotal()}}</th>
+      </tr>
+    </table>
+    <button class="btn btn-success">Demander</button>
+  </div>
+</div>
+

@@ -31,7 +31,7 @@
         <div class="form-group">
           <input type="checkbox" name="promotion"
                  checked>
-          <label >Promotion</label>
+          <label>Promotion</label>
         </div>
         <div>
           <button class="btn btn-success" type="submit">Save</button>&nbsp;
@@ -85,12 +85,12 @@
           <div class="form-group">
             <input type="checkbox" name="available" [(ngModel)]="currentCollaborateur.available"
                    checked>
-            <label >Available</label>
+            <label>Available</label>
           </div>
           <div class="form-group">
-            <input type="checkbox"  name="promotion" [(ngModel)]="currentCollaborateur.promotion"
+            <input [(ngModel)]="currentCollaborateur.promotion" name="promotion" type="checkbox"
                    checked>
-            <label >Promotion</label>
+            <label>Promotion</label>
           </div>
           <button class="btn btn-success" type="submit">Save</button>&nbsp;
           <button (click)="back()" class="btn btn-danger">Retour</button>
